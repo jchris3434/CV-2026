@@ -1,0 +1,12 @@
+{
+  "HomePage": {
+    "title": "coucou TEST JC intl"
+  },
+  "navbar": {
+    "about": "À propos",
+    "education": "Formation",
+    "resume": "CV",
+    "projects": "Projets",
+    "contact": "Contact"
+  }
+}
