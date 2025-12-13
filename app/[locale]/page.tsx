@@ -2,7 +2,7 @@ import {useTranslations} from 'next-intl';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Home Page',
+  title: 'Jean-Christophe Fontaine',
 };
  
 export default function HomePage() {
