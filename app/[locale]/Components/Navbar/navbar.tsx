@@ -6,6 +6,7 @@ import styles from './navbar.module.css';
 import Link from 'next/link';
 import { useEffect, useState } from "react";
 import LocaleSelect from '../LocaleSelect/LocaleSelect';
+import { Funnel_Sans  } from 'next/font/google';
 
 // Mapper les sections avec les clés exactes de traduction
 const sectionKeys: { [key: string]: string } = {
@@ -15,6 +16,12 @@ const sectionKeys: { [key: string]: string } = {
     "projects": "projects",
     "contact": "contact",
 };
+
+const funnelSans = Funnel_Sans({
+  weight: '300', // Poids Light (300)
+  subsets: ['latin'], // Support pour les caractères latins
+  display: 'swap', // Meilleure performance de rendu
+});
 
 export default function Navbar() {
     const t = useTranslations();
@@ -31,7 +38,7 @@ export default function Navbar() {
     }, []);
 
     return (
-  <header className={styles.header}>
+  <header className={`${styles.header} ${funnelSans.className}`}>
     <div className={styles.navContainer}>
       <nav className={styles.nav}>
         <ul className={styles.navList}>

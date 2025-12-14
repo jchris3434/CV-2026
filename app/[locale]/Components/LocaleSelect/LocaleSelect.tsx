@@ -17,7 +17,7 @@ export default function LocaleSelect() {
 
   return (
     <nav className={styles.navFlag}>
-      <button onClick={() => changeLocale('en')}>
+      <button className={styles.buttonFlag} onClick={() => changeLocale('en')}>
         <Image
           src="/icones/ukFlag.png"
           width={25}
@@ -25,7 +25,7 @@ export default function LocaleSelect() {
           alt="English"
         />
       </button>
-      <button onClick={() => changeLocale('fr')}>
+      <button className={styles.buttonFlag}onClick={() => changeLocale('fr')}>
         <Image
           className={styles.frenchFlag}
           src="/icones/frFlag.png"
@@ -34,7 +34,7 @@ export default function LocaleSelect() {
           alt="Français"
         />
       </button>
-      <button onClick={() => changeLocale('re')}>
+      <button className={styles.buttonFlag}onClick={() => changeLocale('re')}>
         <Image
           className={styles.frenchFlag}
           src="/icones/RunFlagV2.png"

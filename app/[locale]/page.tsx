@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 import Welcome from './Components/Welcome/welcome';
 import Navbar from './Components/Navbar/navbar';
 
+
 export const metadata: Metadata = {
   title: 'Jean-Christophe Fontaine',
 };
