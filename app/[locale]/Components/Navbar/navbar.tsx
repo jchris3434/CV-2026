@@ -5,6 +5,7 @@ import styles from './navbar.module.css';
 //import { Link } from "react-scroll";
 import Link from 'next/link';
 import { useEffect, useState } from "react";
+import LocaleSelect from '../LocaleSelect/LocaleSelect';
 
 // Mapper les sections avec les clés exactes de traduction
 const sectionKeys: { [key: string]: string } = {
@@ -63,7 +64,7 @@ export default function Navbar() {
           })}
         </ul>
       </nav>
-      {/* <LocaleSelect /> */}
+      <LocaleSelect />
     </div>
   </header>
 );
