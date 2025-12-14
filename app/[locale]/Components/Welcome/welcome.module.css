@@ -1,0 +1,25 @@
+
+body {
+    margin: 0;
+}
+
+.globaleSection {
+min-height: 100vh;          
+  width: 80%;                
+  margin: 0 auto;           
+  display: flex;            
+  justify-content: space-between; 
+}
+
+.divLeft {
+  width: 50%;                /* Largeur de la div gauche */
+  background-color: lightgray; /* Exemple de fond pour visualiser la div */
+  padding: 10px;             /* Un peu d'espace interne */
+}
+
+/* La div droite prendra 60% de la largeur */
+.divRight {
+  width: 50%;                /* Largeur de la div droite */
+  background-color: lightblue; /* Exemple de fond pour visualiser la div */
+  padding: 10px;             /* Un peu d'espace interne */
+}
