@@ -3,7 +3,7 @@
   top: 0;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  
   z-index: 10;
-  color: #333;  
+  color: #ddd;  
 }
 
 .navContainer {
@@ -41,7 +41,8 @@
 }
 
 .navItem:hover {
-  transform: scale(1.1);  /* Applique un zoom de 10% sur la taille de la police */
+  transform: scale(1.15);  /* Applique un zoom de 10% sur la taille de la police */
+  color: #333;
 }
 
 .navItemActive {

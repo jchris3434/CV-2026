@@ -8,5 +8,13 @@
     "resume": "CV",
     "projects": "Projets",
     "contact": "Contact"
+  },
+  "Welcome": {
+    "greeting": "Bonjour, je suis",
+    "name": "Jean-Christophe Fontaine",
+    "fullstack": "Full-Stack Developer",
+    "jobTitle": "Développeur",
+    "jobTitle2": "DevOps",
+    "description": "Je crée des applications web modernes et performantes."
   }
 }

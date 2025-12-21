@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Funnel+Sans:wght@300&display=swap');
+
 
 :root {
   --background: #ffffff;
@@ -24,5 +26,5 @@ html, body {
   margin: 0;             /* Réinitialiser la marge par défaut */
   padding: 0;            /* Réinitialiser le padding par défaut */
   overflow-x: hidden;    /* Eviter le défilement horizontal */
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Funnel Sans', sans-serif;
 }
