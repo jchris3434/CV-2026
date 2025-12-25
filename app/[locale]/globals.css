@@ -27,4 +27,5 @@ html, body {
   padding: 0;            /* Réinitialiser le padding par défaut */
   overflow-x: hidden;    /* Eviter le défilement horizontal */
   font-family: 'Funnel Sans', sans-serif;
+  scroll-behavior: smooth;
 }

@@ -20,8 +20,8 @@ body {
 
 .imageLeft {
   width: auto;   
-  height: 32rem;   
-  object-fit: contain;
+  max-height: 31rem;   
+  /* object-fit: contain; */
 }
 
 .divRight {

@@ -2,8 +2,8 @@
 
 import { useTranslations } from 'next-intl';
 import styles from './navbar.module.css';
-//import { Link } from "react-scroll";
-import Link from 'next/link';
+import { Link } from "react-scroll";
+//import Link from 'next/link';
 import { useEffect, useState } from "react";
 import LocaleSelect from '../LocaleSelect/LocaleSelect';
 import { Funnel_Sans  } from 'next/font/google';
@@ -37,6 +37,14 @@ export default function Navbar() {
         return () => clearInterval(interval);
     }, []);
 
+    // Fonction de scroll vers la section cible
+  const handleScrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
     return (
   <header className={`${styles.header} ${funnelSans.className}`}>
     <div className={styles.navContainer}>
@@ -56,6 +64,7 @@ export default function Navbar() {
                 <Link
                   href={`#${section}`}
                   className={styles.navLink}
+                  activeClass="active" smooth spy to={section} 
                 >
                   {t(
                     `navbar.${sectionKeys[section]}` as
