@@ -67,7 +67,7 @@ export default function Welcome() {
         />
       </div>
 
-      <div className={`${styles.divRight} ${robotoMono.className}`}>
+      <div className={`${styles.divRight} `}>
         <h1 className={styles.name}>
           {nameEffect.text.split("").map((letter, i) => (
             <span
@@ -84,7 +84,7 @@ export default function Welcome() {
 
         <p className={styles.fullstack}>
   <span
-    className={styles.jobTitleContainer}
+    className={`${styles.jobTitleContainer} ${robotoMono.className}`}
     style={{
       opacity: isTypingEnabled ? 1 : 0, // Appliquer l'opacité en fonction de l'état
       transition: 'opacity 0.5s ease',  // Ajouter une transition CSS pour l'animation

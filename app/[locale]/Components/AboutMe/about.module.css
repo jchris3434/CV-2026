@@ -1,0 +1,56 @@
+.sectionAbout {
+  height: calc(100vh - 4rem);
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.divLeft {
+  width: 55%;
+  /* background-color: lightgray; */
+  /* display: flex; */
+  flex-direction: column;  
+  justify-content: center; 
+  padding: 1rem;
+  padding-top: 3rem;
+  font-size: 1.1rem;
+
+}
+
+
+.divLeft p {
+  text-align: justify; 
+}
+
+.divLeft p:first-of-type {
+  text-align: left; 
+}
+
+.divRight {
+  width: 45%;
+  /* background-color: lightblue; */
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.spanBold {
+  font-weight: bold;
+}
+
+.spanTitle {
+  text-align: center;
+  font-size: 3rem;
+}
+
+.spanPassion {
+  text-align: left;
+}
+
+.imageLeft {
+  width: auto;   
+  height: 25rem;   
+  object-fit: contain;
+}
+

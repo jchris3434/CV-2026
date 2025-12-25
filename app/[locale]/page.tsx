@@ -2,6 +2,7 @@ import {useTranslations} from 'next-intl';
 import { Metadata } from 'next';
 import Welcome from './Components/Welcome/welcome';
 import Navbar from './Components/Navbar/navbar';
+import AboutMe from './Components/AboutMe/about';
 import { Funnel_Sans  } from 'next/font/google';
 
 export const metadata: Metadata = {
@@ -21,6 +22,7 @@ export default function HomePage() {
     <div className={funnelSans.className}>
       <Navbar />
       <Welcome />
+      <AboutMe />
     </div>
       
     </>

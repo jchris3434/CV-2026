@@ -11,7 +11,7 @@ import { Funnel_Sans  } from 'next/font/google';
 // Mapper les sections avec les clés exactes de traduction
 const sectionKeys: { [key: string]: string } = {
     "about-me": "about",
-    "education": "education",
+    "tools": "tools",
     "resume": "resume",
     "projects": "projects",
     "contact": "contact",
