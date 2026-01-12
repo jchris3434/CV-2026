@@ -23,6 +23,9 @@
   "reconversion": "Après plus de dix ans d’expérience dans l’hôtellerie de luxe à l’international, j’ai entrepris une reconversion professionnelle en 2022 pour me consacrer pleinement au développement web. Diplômé <important>Développeur Web & Web Mobile</important>, puis <important>Concepteur Développeur d’Applications (option DevOps)</important>, je combine rigueur, sens du service et compétences techniques.",
   "experience": "J’ai exercé en tant que développeur front-end au sein de l’agence digitale <important>Osmova (French Tech)</important> et chez <important>Exaprint</important>, où j’ai contribué à la réalisation de projets innovants et à la transformation numérique.",
   "dsio": "Aujourd’hui, basé sur <important>l’île de La Réunion</important>, terre où une partie de mes racines se trouvent, j’ai rejoint la <important>Direction des systèmes d'information et Organisation</important> du <important>Conseil Régional de La Réunion</important>, où je participe à des projets numériques à forts enjeux organisationnels et institutionnels."
-}
+},
+"myTools": {
+    "title": "Mes outils"
+  }
 
 }

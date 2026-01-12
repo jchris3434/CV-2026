@@ -1,0 +1,17 @@
+.sectionMyTools {
+  min-height: calc(100vh - 4rem);
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;       /* centrage vertical */
+  justify-content: center;   /* centrage horizontal */
+}
+
+.container {
+  width: 100%;
+  text-align: center;
+}
+
+.title {
+  font-size: 3rem;
+}
