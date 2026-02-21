@@ -1,0 +1,90 @@
+.conception {
+  width: 90%;
+  margin: 0 auto;
+  padding: 4rem 0;
+}
+
+.maintitle {
+  font-size: 3rem;
+} 
+
+.title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
+/* ===== Layout 2 colonnes ===== */
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.leftside {
+  display: flex;
+  justify-content: center;
+}
+
+/* ===== Embla Carousel ===== */
+
+.embla {
+  overflow: hidden;
+  /* width: 100%; */
+  max-width: 90%;
+  height: auto;
+}
+
+.emblaContainer {
+  display: flex;
+}
+
+.emblaSlide {
+  flex: 0 0 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* min-height: 420px; */
+}
+
+.emblaSlide img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* ===== Texte ===== */
+
+.center p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  opacity: 0.9;
+  font-size: 1.1rem;
+}
+
+/* image portrait */
+.tall img {
+  width: 65%;
+  height: auto;
+}
+
+/* image paysage */
+.wide img {
+  width: 85%;
+  max-height: auto; /* ajuste selon rendu */
+}
+
+
+/* ===== Responsive ===== */
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .leftside {
+    margin-bottom: 1rem;
+  }
+}
