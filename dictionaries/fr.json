@@ -25,7 +25,15 @@
   "dsio": "Aujourd’hui, basé sur <important>l’île de La Réunion</important>, terre où une partie de mes racines se trouvent, j’ai rejoint la <important>Direction des systèmes d'information et Organisation</important> du <important>Conseil Régional de La Réunion</important>, où je participe à des projets numériques à forts enjeux organisationnels et institutionnels."
 },
 "myTools": {
-    "title": "Comment se déroule un projet ?"
-  }
+    "title": "Comment se déroule un projet ?",
+     "conception": {
+      "title": "Conception",
+      "description": "Analyse des besoins, rédaction de spécifications techniques, choix des technologies et planification du projet."
+    },
+    "backend": {
+      "title": "Choix Techniques",
+      "description": ""
+    }
+}
 
 }
