@@ -1,0 +1,98 @@
+.devops {
+  padding: 4rem 0;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  max-width: 80%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.maintitle {
+  font-size: 0.9rem;
+  letter-spacing: 0.12rem;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.title {
+  font-size: 2.6rem;
+  font-weight: bold;
+  margin-bottom: 3rem;
+}
+
+/* GRID 4 COLONNES */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+/* CARTES */
+.card {
+  text-align: left;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.6rem;
+  text-align: center;
+}
+
+.icons {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.8rem;
+  justify-content: center; 
+  align-items: center;    
+  flex-wrap: wrap;      
+}
+
+.card p {
+  text-align: justify;
+  hyphens: auto;
+  font-size: 1.1rem;
+}
+
+.logo {
+  width: 6rem;  
+  height: auto;    
+  object-fit: contain;
+  display: block;       
+  margin: 0 auto;     
+}
+
+.logoRect {
+    width: auto;
+    height: 3rem;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+}
+
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.8rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .title {
+    font-size: 2.1rem;
+  }
+}
+
