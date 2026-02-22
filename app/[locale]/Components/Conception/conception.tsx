@@ -24,8 +24,13 @@ export default function Conception() {
   const t = useTranslations('myTools');
 
   const images = [
-  { src: '/images/DiagActiviteFront.png', variant: 'tall' },
-  { src: '/images/Annexe18-MPD.png', variant: 'wide' }
+  { src: '/images/Annexe00.png', variant: 'wide' },
+  { src: '/images/Annexe01.png', variant: 'tall' },
+  { src: '/images/Annexe02.png', variant: 'wide' },
+  { src: '/images/Annexe03.jpg', variant: 'wide' },
+  { src: '/images/Annexe04.jpg', variant: 'wide' },
+  { src: '/images/Annexe05.png', variant: 'wide' },
+  { src: '/images/Annexe06.png', variant: 'wide' },
 ];
 
   return (
