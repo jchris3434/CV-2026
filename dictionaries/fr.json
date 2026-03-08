@@ -26,14 +26,74 @@
 },
 "myTools": {
     "title": "Comment se déroule un projet ?",
-     "conception": {
-      "title": "Conception",
-      "description": "Analyse des besoins, rédaction de spécifications techniques, choix des technologies et planification du projet."
+    "conceptionTitle": "Conception & Modélisation",
+    "conceptionDescription": {
+      "step1": "La conception débute par une analyse fonctionnelle du besoin à l’aide des diagrammes de cas d’utilisation et d’activités. Ces diagrammes permettent de poser les bases du projet en identifiant les acteurs, les objectifs, les parcours utilisateurs et les processus métier.",
+      "step2": "Une fois les besoins clarifiés, j’utilise les diagrammes UML pour concevoir une architecture applicative claire et modulaire, notamment à travers les diagrammes de classes, de composants et de paquetages. Pour la conception des bases de données, j’applique également la méthode <important>Merise</important> à l’aide de MCD et de MLD.",
+      "step3": "Les diagrammes de séquence, de communication, d’états-transitions et d’objets me permettent de modéliser les interactions entre services, les flux applicatifs et le comportement du système.",
+      "step4": "Enfin, les diagrammes de déploiement et d’interaction globale représentent l’infrastructure, les environnements, les conteneurs et les dépendances entre services, dans une logique <important>DevOps</important> orientée déploiement et maintenabilité."
     },
-    "backend": {
-      "title": "Choix Techniques",
-      "description": ""
+    "backendTitle": "Back-End & Architecture",
+    "backendDescription": {
+      "step1": "Je conçois et développe des applications et <important>API REST</important> robustes en environnement <important>Node.js</important> et <important>TypeScript</important>, en privilégiant des architectures modulaires, maintenables et performantes.",
+      "step2": "J’implémente des services sécurisés avec gestion de l’authentification, validation des données et organisation claire des routes et couches métiers.",
+      "step3": "Pour la persistance des données, j’utilise des bases relationnelles comme <important>MySQL</important> ou NoSQL telles que <important>MongoDB</important>, ainsi que des ORM comme <important>Sequelize</important> afin de garantir cohérence, maintenabilité et évolutivité du code.",
+      "step4": "Selon les besoins du projet, je peux également intervenir en <important>PHP</important> pour la maintenance ou l’évolution d’applications existantes.",
+      "step5": "Je travaille dans des environnements conteneurisés avec <important>Docker</important>, garantissant reproductibilité, portabilité et déploiements fiables dans une approche orientée <important>DevOps</important>."
+    },
+    "frontendTitle": "Front-End & Expérience Utilisateur",
+    "frontendDescription": {
+      "step1": "Je conçois des interfaces modernes, performantes et accessibles, avec une forte orientation <important>JavaScript</important> et plus particulièrement <important>React</important>.",
+      "step2": "Lors de mon expérience chez <important>Exaprint</important>, j’ai participé à l’évolution d’un site e-commerce en développant de nouvelles fonctionnalités basées sur l’analyse comportementale via <important>ContentSquare</important> et les <important>A/B tests</important>, principalement en <important>React</important>, <important>TypeScript</important> et <important>GraphQL</important>, dans un environnement Agile.",
+      "step3": "Je porte une attention particulière à la performance, l’accessibilité et l’expérience utilisateur afin de proposer des interfaces fluides et intuitives.",
+      "step4": "Je maîtrise également l’intégration de maquettes <important>Figma</important>, le responsive design et les architectures front modulaires. J’ai aussi travaillé avec <important>Vue.js</important> et <important>Pinia</important> pour la gestion d’état.",
+      "step5": "Mon objectif est de créer des applications web rapides, maintenables et agréables à utiliser, en lien étroit avec les enjeux métier et l’expérience utilisateur."
+    },
+    "devopsTitle": "Déploiement & DevOps",
+    "devopsPillars": {
+      "qualitySecurity": {
+        "title": "Qualité & Sécurité",
+        "text": "Analyse continue du code avec <important>SonarQube</important> afin de détecter les bugs, vulnérabilités et mauvaises pratiques.\n\nApplication des bonnes pratiques <important>OWASP</important> pour renforcer la sécurité des applications et prévenir les failles courantes."
+      },
+      "ciCd": {
+        "title": "CI/CD & Automatisation",
+        "text": "Mise en place de pipelines CI/CD avec <important>GitLab CI/CD</important> et <important>Jenkins</important> pour automatiser les tests, builds et déploiements.\n\nObjectif : livraisons rapides, fiables et reproductibles."
+      },
+      "monitoring": {
+        "title": "Monitoring & Observabilité",
+        "text": "Supervision des services et infrastructures avec <important>Prometheus</important> et <important>Grafana</important> pour le monitoring temps réel.\n\nMise en place d’alertes et tableaux de bord pour anticiper les incidents."
+      },
+      "architecture": {
+        "title": "Architecture & Orchestration",
+        "text": "Notions d’architectures microservices et orchestration avec <important>Kubernetes</important> pour des applications scalables, résilientes et adaptées aux environnements cloud.\n\nConteneurisation avec <important>Docker</important> pour garantir portabilité et cohérence des déploiements."
+      }
     }
-}
+  },
+  "projects": {
+    "sectionTitle": "Projets",
+    "items": {
+      "exaprint": "Exaprint",
+      "woocommerce": "Site WooCommerce",
+      "restaurant": "Restaurant",
+      "landify": "Landify",
+      "gestion": "Logiciel Gestion",
+      "cmsMaison": "Création CMS Maison",
+      "portfolio": "Portfolio 2024"
+    }
+  },
+  "contact": {
+    "sectionTitle": "Contact",
+    "subtitle": "Toujours dispo pour répondre à vos questions !",
+    "placeholders": {
+      "name": "Nom",
+      "email": "Email",
+      "message": "Message"
+    },
+    "buttons": {
+      "submit": "Envoyer",
+      "loading": "Envoi..."
+    },
+    "thankYou": "Merci, message envoyé !"
+  }
 
 }

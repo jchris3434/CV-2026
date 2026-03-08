@@ -1,12 +1,98 @@
 {
   "HomePage": {
-    "title": "coucou TEST JC intl"
+    "title": "Bonzour TEST JC intl"
   },
   "navbar": {
-    "about": "À propos",
-    "education": "Formation",
+    "about": "A prop",
+    "tools": "Mon bann zouti",
     "resume": "CV",
-    "projects": "Projets",
-    "contact": "Contact"
+    "projects": "Prozé",
+    "contact": "Kontak"
+  },
+  "Welcome": {
+    "greeting": "Bonzour, mon lé",
+    "name": "Jean-Christophe Fontaine",
+    "fullstack": "Développeur Full-Stack",
+    "jobTitle": "Développeur",
+    "jobTitle2": "DevOps",
+    "description": "Mon fé bann aplikasyon web modèrn é performant."
+  },
+  "aboutMe": {
+    "title": "KISAW MWÉ ?",    
+    "passion": "<important>Jean-Christophe</important>, in développeur web passioné par linformatik é bann teknolozi modèrn.",
+    "reconversion": "Apré plis ki dis an dan lôtel luks a l’international, mon fé in chanjman karyèr an 2022 pou dédiy mon letan a devlopman web. Diplomé <important>Développeur Web & Web Mobile</important>, épi <important>Concepteur Développeur d’Applications (option DevOps)</important>, mon konbin rigueur, sans servis é konpétans teknik.",
+    "experience": "Mon travay kom développeur front-end dann l’agence digitale <important>Osmova (French Tech)</important> é osi kot <important>Exaprint</important>, kot mon kontribié pou réalis bann prozé inovant é la transformasion numérique.",
+    "dsio": "Azordi, basé lo <important>l’île de La Réunion</important>, kot in parti mon rasinn i trouvé, mon finn réjoint <important>Direction des systèmes d'information et Organisation</important> du <important>Conseil Régional de La Réunion</important>, kot mon partisip dann bann prozé numérique ki in gran enportans pou l’organisation é l’institisyon."
+  },
+  "myTools": {
+    "title": "Kouma in prozé i marse ?",
+    "conceptionTitle": "Konstriksion & Modélisation",
+    "conceptionDescription": {
+      "step1": "La konstriksion i koumanse par in analiz fonksyonèl avek diagram d’utilisation é d’activité. Sa diagram-la i permet met baz prozé-la an identifiant bann aktèr, bann lobjectif, bann parcours utilisateur é bann proses biznes.",
+      "step2": "Kan bann besoin i klèr, mon servi diagram UML pou koncevoir in arkitektir aplikasyon ki klèr é modulèr, spécialman par diagram klas, komponan é paket. Pou baz donné, mon osi aplike metòd <important>Merise</important> avek MCD é MLD.",
+      "step3": "Diagram sékans, kominikasyon, états-transition é objè i permet mon modéliz interaksyon ant bann servis, flux aplikasyon é konportman sistenm-la.",
+      "step4": "Finalman, bann diagram déployman é interaksyon global i réprésant infrastrikti, lanvironnman, kontenèr é dépendans ant servis, dan in logik <important>DevOps</important> konsantre lo déployman é maintenabilité."
+    },
+    "backendTitle": "Back-End & Arkitektir",
+    "backendDescription": {
+      "step1": "Mon koncevoir é développer bann aplikasyon é <important>API REST</important> robuste dann <important>Node.js</important> é <important>TypeScript</important>, préferant bann arkitektir modulèr, maintenabl é performant.",
+      "step2": "Mon implément bann servis sécurisé avek gestion authentification, validation bann donnés é organisation klèr bann route é couche métier.",
+      "step3": "Pou gard bann donnés, mon servi baz relationel kom <important>MySQL</important> ou NoSQL kom <important>MongoDB</important>, é osi ORM kom <important>Sequelize</important> pou garanti konsistans, maintenabilité é évolutivité kòd-la.",
+      "step4": "Si prozé i demande, mon kapav osi travay an <important>PHP</important> pou maintenance ou évolision bann aplikasyon ki ekzist.",
+      "step5": "Mon travay dann bann lanvironnman kontenirizé avek <important>Docker</important>, pou garanti reproducibilité, portabilité é déployman fiable dan in logik <important>DevOps</important>."
+    },
+    "frontendTitle": "Front-End & L’expérience Utilisateur",
+    "frontendDescription": {
+      "step1": "Mon koncevoir bann interfase modèrn, performant é aksesib, avek in gran fokus lor <important>JavaScript</important> é spécifikman <important>React</important>.",
+      "step2": "Kan mon travay kot <important>Exaprint</important>, mon kontribié dan évolision in site e-commerce an développant nouvo fonksyonalité basé lor analis konportman avek <important>ContentSquare</important> é <important>A/B tests</important>, principalman an <important>React</important>, <important>TypeScript</important> é <important>GraphQL</important> dan in lanvironnman Agile.",
+      "step3": "Mon atansion i porté lor performans, aksesibilité é expérience utilisateur pou propoze interfase fluid é intuitif.",
+      "step4": "Mon osi maîtriz intégrasion maquette <important>Figma</important>, responsive design é arkitektir front modulèr. Mon finn osi travay avek <important>Vue.js</important> é <important>Pinia</important> pou gestion état.",
+      "step5": "Mon lobjectif i pou crée bann aplikasyon web rapid, maintenabl é agrèab a servi, bien aligné avek bann besoin biznes é expérience utilisateur."
+    },
+    "devopsTitle": "Déployman & DevOps",
+    "devopsPillars": {
+      "qualitySecurity": {
+        "title": "Kalité & Sekirite",
+        "text": "Analiz kontinny kòd avek <important>SonarQube</important> pou trouv bann bug, vulnerabilités é move pratik.\n\nAplik bann bon pratik <important>OWASP</important> pou renforz sekirite bann aplikasyon é evité bann fôte courant."
+      },
+      "ciCd": {
+        "title": "CI/CD & Otomatisation",
+        "text": "Miz an plas bann pipeline CI/CD avek <important>GitLab CI/CD</important> é <important>Jenkins</important> pou otomatik test, build é déployman.\n\nLobjectif : livrezon rapid, fiable é reproducible."
+      },
+      "monitoring": {
+        "title": "Monitoring & Observabilité",
+        "text": "Supervision bann servis é infrastrikti avek <important>Prometheus</important> é <important>Grafana</important> pou monitoring tan réel.\n\nMiz an plas alert é dashboard pou anticip bann problèm."
+      },
+      "architecture": {
+        "title": "Arkitektir & Orchestration",
+        "text": "Konsepsyon microservices é orchestration avek <important>Kubernetes</important> pou bann aplikasyon scalable, résilient é adapt a cloud.\n\nKontenirizasion avek <important>Docker</important> pou garanti portabilité é konsistans bann déployman."
+      }
+    }
+  },
+  "projects": {
+    "sectionTitle": "Prozé",
+    "items": {
+      "exaprint": "Exaprint",
+      "woocommerce": "Site WooCommerce",
+      "restaurant": "Restaurant",
+      "landify": "Landify",
+      "gestion": "Logiciel Gestion",
+      "cmsMaison": "Création CMS Maison",
+      "portfolio": "Portfolio 2024"
+    }
+  },
+  "contact": {
+    "sectionTitle": "Kontak",
+    "subtitle": "Toujour dispo pou répondr a zot bann kestions !",
+    "placeholders": {
+      "name": "Nom",
+      "email": "Email",
+      "message": "Messaz"
+    },
+    "buttons": {
+      "submit": "Voye",
+      "loading": "Anvoi..."
+    },
+    "thankYou": "Mersi, messaz la finn voye !"
   }
 }

@@ -2,9 +2,12 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import styles from './contact.module.css';
 
 export default function Contact() {
+  const t = useTranslations('contact');
+
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -42,10 +45,8 @@ export default function Contact() {
 
   return (
     <section id="contact" className={styles.contact}>
-      <h1 className={styles.title}>Contact</h1>
-      <p className={styles.subtitle}>
-        Toujours dispo pour répondre à vos questions !
-      </p>
+      <h1 className={styles.title}>{t('sectionTitle')}</h1>
+      <p className={styles.subtitle}>{t('subtitle')}</p>
 
       <div className={styles.icons}>
         <a
@@ -66,18 +67,13 @@ export default function Contact() {
       </div>
 
       <form className={styles.form} onSubmit={handleSubmit}>
-
         {/* Honeypot anti-spam */}
-        <input
-          type="text"
-          name="_gotcha"
-          style={{ display: "none" }}
-        />
+        <input type="text" name="_gotcha" style={{ display: "none" }} />
 
         <input
           type="text"
           name="name"
-          placeholder="Nom"
+          placeholder={t('placeholders.name')}
           value={form.name}
           onChange={handleChange}
           required
@@ -86,7 +82,7 @@ export default function Contact() {
         <input
           type="email"
           name="email"
-          placeholder="Email"
+          placeholder={t('placeholders.email')}
           value={form.email}
           onChange={handleChange}
           required
@@ -94,7 +90,7 @@ export default function Contact() {
 
         <textarea
           name="message"
-          placeholder="Message"
+          placeholder={t('placeholders.message')}
           value={form.message}
           onChange={handleChange}
           rows={5}
@@ -102,13 +98,10 @@ export default function Contact() {
         />
 
         <button type="submit" disabled={loading}>
-          {loading ? "Envoi..." : "Envoyer"}
+          {loading ? t('buttons.loading') : t('buttons.submit')}
         </button>
 
-        {submitted && (
-          <p className={styles.thanks}>Merci, message envoyé !</p>
-        )}
-
+        {submitted && <p className={styles.thanks}>{t('thankYou')}</p>}
       </form>
     </section>
   );

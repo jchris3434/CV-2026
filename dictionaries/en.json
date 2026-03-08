@@ -1,5 +1,98 @@
 {
   "HomePage": {
-    "title": "Hello TEST JC English"
+    "title": "Hello TEST JC intl"
+  },
+  "navbar": {
+    "about": "About",
+    "tools": "My Tools",
+    "resume": "Resume",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "Welcome": {
+    "greeting": "Hello, I am",
+    "name": "Jean-Christophe Fontaine",
+    "fullstack": "Full-Stack Developer",
+    "jobTitle": "Developer",
+    "jobTitle2": "DevOps",
+    "description": "I create modern and high-performance web applications."
+  },
+  "aboutMe": {
+    "title": "WHO AM I?",    
+    "passion": "<important>Jean-Christophe</important>, a web developer passionate about computer science and modern technologies.",
+    "reconversion": "After more than ten years of experience in luxury hospitality internationally, I undertook a professional career change in 2022 to fully dedicate myself to web development. Graduated <important>Web & Mobile Web Developer</important>, then <important>Application Developer (DevOps option)</important>, I combine rigor, service orientation, and technical skills.",
+    "experience": "I worked as a front-end developer at the digital agency <important>Osmova (French Tech)</important> and at <important>Exaprint</important>, where I contributed to innovative projects and digital transformation.",
+    "dsio": "Today, based on <important>Réunion Island</important>, where part of my roots lie, I joined the <important>Information Systems and Organization Department</important> of the <important>Regional Council of Réunion</important>, participating in high-stakes organizational and institutional digital projects."
+  },
+  "myTools": {
+    "title": "How does a project unfold?",
+    "conceptionTitle": "Design & Modeling",
+    "conceptionDescription": {
+      "step1": "Design begins with a functional analysis of requirements using use case and activity diagrams. These diagrams help lay the project's foundation by identifying actors, objectives, user journeys, and business processes.",
+      "step2": "Once the requirements are clarified, I use UML diagrams to design a clear and modular application architecture, particularly through class, component, and package diagrams. For database design, I also apply the <important>Merise</important> methodology using ERD and relational models.",
+      "step3": "Sequence, communication, state-transition, and object diagrams allow me to model interactions between services, application flows, and system behavior.",
+      "step4": "Finally, deployment and global interaction diagrams represent the infrastructure, environments, containers, and service dependencies, in a <important>DevOps</important>-oriented approach focused on deployment and maintainability."
+    },
+    "backendTitle": "Back-End & Architecture",
+    "backendDescription": {
+      "step1": "I design and develop robust applications and <important>REST APIs</important> in <important>Node.js</important> and <important>TypeScript</important> environments, favoring modular, maintainable, and high-performance architectures.",
+      "step2": "I implement secure services with authentication management, data validation, and clear organization of routes and business layers.",
+      "step3": "For data persistence, I use relational databases like <important>MySQL</important> or NoSQL such as <important>MongoDB</important>, as well as ORMs like <important>Sequelize</important> to ensure code consistency, maintainability, and scalability.",
+      "step4": "Depending on project needs, I can also work in <important>PHP</important> for maintaining or evolving existing applications.",
+      "step5": "I work in containerized environments with <important>Docker</important>, ensuring reproducibility, portability, and reliable deployments in a <important>DevOps</important>-oriented approach."
+    },
+    "frontendTitle": "Front-End & User Experience",
+    "frontendDescription": {
+      "step1": "I design modern, high-performance, and accessible interfaces with a strong focus on <important>JavaScript</important>, particularly <important>React</important>.",
+      "step2": "During my experience at <important>Exaprint</important>, I contributed to the evolution of an e-commerce site by developing new features based on behavioral analysis via <important>ContentSquare</important> and <important>A/B tests</important>, mainly using <important>React</important>, <important>TypeScript</important>, and <important>GraphQL</important> in an Agile environment.",
+      "step3": "I pay particular attention to performance, accessibility, and user experience to provide smooth and intuitive interfaces.",
+      "step4": "I am also proficient in integrating <important>Figma</important> mockups, responsive design, and modular front-end architectures. I have also worked with <important>Vue.js</important> and <important>Pinia</important> for state management.",
+      "step5": "My goal is to create fast, maintainable, and enjoyable web applications, closely aligned with business needs and user experience."
+    },
+    "devopsTitle": "Deployment & DevOps",
+    "devopsPillars": {
+      "qualitySecurity": {
+        "title": "Quality & Security",
+        "text": "Continuous code analysis with <important>SonarQube</important> to detect bugs, vulnerabilities, and bad practices.\n\nApplication of <important>OWASP</important> best practices to strengthen application security and prevent common vulnerabilities."
+      },
+      "ciCd": {
+        "title": "CI/CD & Automation",
+        "text": "Implementation of CI/CD pipelines with <important>GitLab CI/CD</important> and <important>Jenkins</important> to automate tests, builds, and deployments.\n\nObjective: fast, reliable, and reproducible deliveries."
+      },
+      "monitoring": {
+        "title": "Monitoring & Observability",
+        "text": "Supervision of services and infrastructures using <important>Prometheus</important> and <important>Grafana</important> for real-time monitoring.\n\nSetup of alerts and dashboards to anticipate incidents."
+      },
+      "architecture": {
+        "title": "Architecture & Orchestration",
+        "text": "Microservices architecture and orchestration concepts with <important>Kubernetes</important> for scalable, resilient applications adapted to cloud environments.\n\nContainerization with <important>Docker</important> to ensure portability and deployment consistency."
+      }
+    }
+  },
+  "projects": {
+    "sectionTitle": "Projects",
+    "items": {
+      "exaprint": "Exaprint",
+      "woocommerce": "WooCommerce Site",
+      "restaurant": "Restaurant",
+      "landify": "Landify",
+      "gestion": "Management Software",
+      "cmsMaison": "Custom CMS Creation",
+      "portfolio": "Portfolio 2024"
+    }
+  },
+  "contact": {
+    "sectionTitle": "Contact",
+    "subtitle": "Always available to answer your questions!",
+    "placeholders": {
+      "name": "Name",
+      "email": "Email",
+      "message": "Message"
+    },
+    "buttons": {
+      "submit": "Send",
+      "loading": "Sending..."
+    },
+    "thankYou": "Thank you, message sent!"
   }
 }
