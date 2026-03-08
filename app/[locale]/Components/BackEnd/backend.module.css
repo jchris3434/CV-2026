@@ -100,3 +100,20 @@
 .center strong {
   font-weight: 700;
 }
+
+/* scroll pour le front sens inverse : */
+
+@keyframes scrollRight {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.trackReverse {
+  display: flex;
+  width: max-content;
+  animation: scrollRight 50s linear infinite;
+}

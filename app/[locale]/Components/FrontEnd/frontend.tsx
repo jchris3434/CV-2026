@@ -69,7 +69,7 @@ export default function FrontEnd() {
         {/* LOGOS */}
         <div className={styles.logosWrapper}>
           <div className={styles.marquee}>
-            <div className={styles.track}>
+            <div className={styles.trackReverse}>
               {images.concat(images).map((img, index) => (
                 <div className={styles.logoItem} key={index}>
                   <Image
