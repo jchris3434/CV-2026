@@ -12,7 +12,6 @@ import { Funnel_Sans  } from 'next/font/google';
 const sectionKeys: { [key: string]: string } = {
     "about-me": "about",
     "tools": "tools",
-    "resume": "resume",
     "projects": "projects",
     "contact": "contact",
 };
