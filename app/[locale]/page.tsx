@@ -5,6 +5,7 @@ import Navbar from './Components/Navbar/navbar';
 import AboutMe from './Components/AboutMe/about';
 import MyTools from './Components/MyTools/mytools';
 import Projects from './Components/Projects/projects';
+import Contact from './Components/Contact/contact';
 import { Funnel_Sans  } from 'next/font/google';
 
 export const metadata: Metadata = {
@@ -27,6 +28,7 @@ export default function HomePage() {
       <AboutMe />
       <MyTools />
       <Projects />
+      <Contact />
     </div>
       
     </>
