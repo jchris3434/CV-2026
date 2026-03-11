@@ -34,7 +34,7 @@ export default function LocaleSelect() {
           alt="Français"
         />
       </button>
-      <button className={styles.buttonFlag}onClick={() => changeLocale('re')}>
+      {/* <button className={styles.buttonFlag}onClick={() => changeLocale('re')}>
         <Image
           className={styles.frenchFlag}
           src="/icones/RunFlagV2.png"
@@ -42,7 +42,7 @@ export default function LocaleSelect() {
           height={27}
           alt="Créole"
         />
-      </button>
+      </button> */}
     </nav>
   );
 }
