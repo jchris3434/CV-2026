@@ -31,7 +31,7 @@ export default function LocaleSelect() {
           src="/icones/frFlag.png"
           width={27}
           height={27}
-          alt="Français"
+          alt="Francais"
         />
       </button>
       {/* <button className={styles.buttonFlag}onClick={() => changeLocale('re')}>
