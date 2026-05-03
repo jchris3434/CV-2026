@@ -129,11 +129,11 @@
 
 .icons {
   margin-top: 1rem;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
   gap: 0.8rem;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
 }
 
 .logo,
@@ -182,4 +182,10 @@
     font-size: 2.1rem;
   }
 
+}
+
+@media (max-width: 1600px) {
+  .container {
+    max-width: 90%;
+  }
 }

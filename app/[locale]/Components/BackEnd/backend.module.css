@@ -1,7 +1,7 @@
 .backend {
   width: 90%;
   min-height: 100vh;
-  margin: 0 auto;
+  margin: 0 auto;  
   display: flex;
   justify-content: center;
 }
@@ -116,4 +116,10 @@
   display: flex;
   width: max-content;
   animation: scrollRight 50s linear infinite;
+}
+
+@media (max-width: 1920px) {
+  .backend {
+    padding-top: 8rem;
+  }
 }

@@ -79,3 +79,51 @@ body {
   background: linear-gradient(90deg, #ff6a00, #ff78b9, #378ffb); 
   background-clip: text; /* Applique le gradient au texte */
 }
+
+/* =========================
+   RESPONSIVE MOBILE
+========================= */
+
+@media (max-width: 900px) {
+
+  .globaleSection {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: auto;
+    padding: 2rem 0;
+  }
+
+  /* Image en haut */
+  .divLeft {
+    order: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+
+  /* Texte en dessous */
+  .divRight {
+    order: 2;
+    width: 100%;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .imageLeft {
+    height: auto;
+    max-height: 14rem;
+    width: auto;
+    animation: none;
+  }
+
+  .name {
+    font-size: 2rem;
+  }
+
+  .jobTitleContainer {
+    font-size: 1.5rem;
+  }
+}

@@ -56,3 +56,25 @@
   object-fit: contain;
 }
 
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+  .sectionAbout {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .divLeft {
+    width: 80%;
+    max-width: 90%;
+    padding: 0;
+  }
+
+  .divRight {
+    display: none;
+  }
+}
