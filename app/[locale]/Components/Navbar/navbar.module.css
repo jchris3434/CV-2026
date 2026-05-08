@@ -3,8 +3,8 @@
   top: 0;
   background-color: #fff;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  
-  z-index: 10;
-  color: #ddd;  
+  z-index: 1000;
+  color: #555; /* On met une couleur visible par défaut */
 }
 
 .navContainer {
@@ -12,8 +12,11 @@
   align-items: center;
   justify-content: center;
   width: 100%;
+  position: relative; /* Pour positionner LocaleSelect et Hamburger */
+  min-height: 4rem;
 }
 
+/* --- NAVIGATION BASE --- */
 .nav {
   font-weight: 600;
   font-size: 1rem;
@@ -34,7 +37,7 @@
   border-bottom: 2px solid transparent;
   cursor: pointer;
   opacity: 0;
-  transition: opacity 0.5s ease-in-out, color 0.2s;
+  transition: opacity 0.5s ease-in-out, color 0.2s, transform 0.2s;
 }
 
 .navItemVisible {
@@ -42,35 +45,96 @@
 }
 
 .navItem:hover {
-  transform: scale(1.15);  /* Applique un zoom de 10% sur la taille de la police */
+  transform: scale(1.15);
   color: #333;
 }
 
-.navItemActive {
-  border-color: #1da9cc;
+/* Style spécifique pour react-scroll quand la section est active */
+.navItem :global(.active) {
+  color: #1da9cc;
+  border-bottom: 2px solid #1da9cc;
+  padding-bottom: 1.1rem; /* Pour compenser la bordure */
 }
 
 .navLink {
-  text-decoration: none;
-  color: inherit;
+  text-decoration: none !important; /* Force la suppression du souligné */
+  color: inherit !important;       /* Utilise la couleur du parent (navItem) */
+  outline: none;
 }
 
-.navFlag {
-  display: flex;
-  /* align-items: center; */
-  gap: 0.4rem;
+/* --- LOCALE SELECT --- */
+.localeWrapper {
   position: absolute;
   right: 2rem;
 }
 
-.frenchFlag {
-  width: 27px;
-  height: 27px;
+/* --- HAMBURGER (Caché par défaut) --- */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 2rem;
+  height: 1.5rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1001;
+  position: absolute;
+  left: 1.5rem;
+}
+
+.bar {
+  width: 2rem;
+  height: 0.2rem;
+  background: #333;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  transform-origin: 1px;
 }
 
 .buttonFlag {
   background: none;
   border: none;
-  padding: 0;
+  padding: 0.2rem;
   cursor: pointer;
+}
+
+/* --- RESPONSIVE MOBILE --- */
+@media (max-width: 900px) {
+  .hamburger {
+    display: flex;
+  }
+
+  /* Animation X */
+  .barOpen:nth-child(1) { transform: rotate(45deg); }
+  .barOpen:nth-child(2) { opacity: 0; transform: translateX(20px); }
+  .barOpen:nth-child(3) { transform: rotate(-45deg); }
+
+  .nav {
+    position: fixed;
+    top: 4rem;
+    left: -100%; /* Caché */
+    width: 100%;
+    height: calc(100vh - 4rem);
+    background: #fff;
+    transition: left 0.4s cubic-bezier(0.77,0.2,0.05,1.0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .navOpen {
+    left: 0; /* Affiché */
+  }
+
+  .navList {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .navItem {
+    font-size: 1.5rem;
+    opacity: 1; /* On force la visibilité sur mobile */
+  }
 }

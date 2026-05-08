@@ -3,12 +3,10 @@
 import { useTranslations } from 'next-intl';
 import styles from './navbar.module.css';
 import { Link } from "react-scroll";
-//import Link from 'next/link';
 import { useEffect, useState } from "react";
 import LocaleSelect from '../LocaleSelect/LocaleSelect';
-import { Funnel_Sans  } from 'next/font/google';
+import { Funnel_Sans } from 'next/font/google';
 
-// Mapper les sections avec les clés exactes de traduction
 const sectionKeys: { [key: string]: string } = {
     "about-me": "about",
     "tools": "tools",
@@ -17,70 +15,74 @@ const sectionKeys: { [key: string]: string } = {
 };
 
 const funnelSans = Funnel_Sans({
-  weight: '300', // Poids Light (300)
-  subsets: ['latin'], // Support pour les caractères latins
-  display: 'swap', // Meilleure performance de rendu
+    weight: '300',
+    subsets: ['latin'],
+    display: 'swap',
 });
 
 export default function Navbar() {
     const t = useTranslations();
-
-    // État pour gérer la visibilité des items
     const [visibleItems, setVisibleItems] = useState<number>(0);
+    // État pour le menu mobile
+    const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
         const interval = setInterval(() => {
             setVisibleItems((prev) => Math.min(prev + 1, Object.keys(sectionKeys).length));
         }, 300);
-
         return () => clearInterval(interval);
     }, []);
 
-    // Fonction de scroll vers la section cible
-  const handleScrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+    // Fermer le menu lors d'un clic sur un lien
+    const closeMenu = () => setIsOpen(false);
 
     return (
-  <header className={`${styles.header} ${funnelSans.className}`}>
-    <div className={styles.navContainer}>
-      <nav className={styles.nav}>
-        <ul className={styles.navList}>
-          {Object.keys(sectionKeys).map((section, index) => {
-            const isVisible = visibleItems > index;
-
-            return (
-              <li
-                key={section}
-                className={`
-                  ${styles.navItem}
-                  ${isVisible ? styles.navItemVisible : ''}
-                `}
-              >
-                <Link
-                  href={`#${section}`}
-                  className={styles.navLink}
-                  activeClass="active" smooth spy to={section} 
+        <header className={`${styles.header} ${funnelSans.className}`}>
+            <div className={styles.navContainer}>
+                
+                {/* Bouton Hamburger */}
+                <button 
+                    className={styles.hamburger} 
+                    onClick={() => setIsOpen(!isOpen)}
+                    aria-label="Menu"
                 >
-                  {t(
-                    `navbar.${sectionKeys[section]}` as
-                      | 'navbar.about'
-                      | 'navbar.education'
-                      | 'navbar.resume'
-                      | 'navbar.projects'
-                      | 'navbar.contact'
-                  )}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </nav>
-      <LocaleSelect />
-    </div>
-  </header>
-);
+                    <span className={`${styles.bar} ${isOpen ? styles.barOpen : ''}`}></span>
+                    <span className={`${styles.bar} ${isOpen ? styles.barOpen : ''}`}></span>
+                    <span className={`${styles.bar} ${isOpen ? styles.barOpen : ''}`}></span>
+                </button>
+
+                <nav className={`${styles.nav} ${isOpen ? styles.navOpen : ''}`}>
+                    <ul className={styles.navList}>
+                        {Object.keys(sectionKeys).map((section, index) => {
+                            const isVisible = visibleItems > index;
+
+                            return (
+                                <li
+                                    key={section}
+                                    className={`
+                                        ${styles.navItem}
+                                        ${isVisible ? styles.navItemVisible : ''}
+                                    `}
+                                >
+                                    <Link
+                                        href={`#${section}`}
+                                        className={styles.navLink}
+                                        activeClass={styles.navItemActive} 
+                                        smooth spy to={section}
+                                        onClick={closeMenu} // Ferme le menu au clic
+                                    >
+                                        {t(`navbar.${sectionKeys[section]}` as any)}
+                                    </Link>
+                                </li>
+                            );
+                        })}
+                    </ul>
+                </nav>
+                
+                <div className={styles.localeWrapper}>
+                    <LocaleSelect />
+                </div>
+            </div>
+        </header>
+    );
 }
