@@ -91,7 +91,7 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    height: auto;
+    /* height: auto; */
     padding: 2rem 0;
   }
 
