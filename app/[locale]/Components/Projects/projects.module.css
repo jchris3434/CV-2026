@@ -168,3 +168,18 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+  .projects {
+    padding: 2rem 0;
+  }
+
+  .container {
+    width: 85%;
+  }
+
+}

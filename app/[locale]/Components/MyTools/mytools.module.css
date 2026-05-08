@@ -1,15 +1,13 @@
 .sectionMyTools {
-  /* min-height: 100vh; */
   width: 90%;
   margin: 0 auto;
   display: flex;
-  align-items: center;       /* centrage vertical */
-  justify-content: center;   /* centrage horizontal */
+  align-items: center;       
+  justify-content: center;  
 }
 
 .container {
   width: 100%;
   text-align: justify;
 }
-
 

@@ -6,6 +6,7 @@
   justify-content: center;
 }
 
+
 .layout {
   display: flex;
   flex-direction: column;
@@ -118,8 +119,33 @@
   animation: scrollRight 50s linear infinite;
 }
 
-@media (max-width: 1920px) {
-  .backend {
-    padding-top: 8rem;
+
+/* ===== Responsive ===== */
+
+@media (max-width: 900px) {
+  .title {
+    width: 100%;
+    font-size: 2rem; /* Réduire la taille du titre sur mobile */
   }
+  
+  .backend {
+    padding-top: 2rem; /* Moins d'espace en haut sur petit écran */
+  }
+
+  .logoItem {
+    padding: 0 1rem; /* Réduire l'espace entre les logos pour éviter les trous */
+  }
+  .center {
+    width: 90%;
+  }
+
+  .layout {
+    width: 110%;
+  }
+
+  .logosWrapper {
+  width: 90%;
+  overflow: hidden;
 }
+}
+

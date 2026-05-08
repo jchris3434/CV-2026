@@ -30,7 +30,6 @@
   margin-bottom: 3rem;
 }
 
-
 /* =========================
    GRID
 ========================= */
@@ -41,7 +40,6 @@
   gap: 2rem;
 }
 
-
 /* =========================
    CARDS
 ========================= */
@@ -49,60 +47,51 @@
 .card {
   position: relative;
   overflow: hidden;
-
   padding: 1.8rem;
   border-radius: 14px;
-
   text-align: left;
   font-size: 0.95rem;
   line-height: 1.6;
-
-  background: rgba(255,255,255,0.04);
+  background: rgba(255, 255, 255, 0.04);
   backdrop-filter: blur(6px);
-
-  border: 1px solid rgba(255,255,255,0.08);
-
+  border: 1px solid rgba(255, 255, 255, 0.08);
   transition:
     transform 0.25s ease,
     box-shadow 0.25s ease,
     border 0.25s ease;
 }
 
-.card:hover {
+/* État actif : Hover OU Classe active (Mobile) */
+.card:hover,
+.card.activeCard {
   transform: translateY(-6px);
-
-  border: 1px solid rgba(255,255,255,0.2);
-
+  border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow:
-    0 10px 30px rgba(0,0,0,0.3),
-    0 0 20px rgba(100,150,255,0.15);
+    0 10px 30px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(100, 150, 255, 0.15);
 }
 
-/* gradient hover */
-
+/* Gradient de fond au survol/activation */
 .card::before {
   content: "";
   position: absolute;
   inset: 0;
   border-radius: 14px;
-
-   background: linear-gradient(
+  background: linear-gradient(
     120deg,
     transparent,
     rgba(120, 192, 244, 0.15),
     transparent
   );
-
   opacity: 0;
   transition: opacity 0.3s ease;
-
   pointer-events: none;
 }
 
-.card:hover::before {
+.card:hover::before,
+.card.activeCard::before {
   opacity: 1;
 }
-
 
 /* =========================
    TEXT
@@ -121,7 +110,6 @@
   font-size: 1.05rem;
   opacity: 0.9;
 }
-
 
 /* =========================
    ICONS
@@ -154,16 +142,24 @@
   height: 2rem;
 }
 
+/* Animation des logos au survol/activation */
 .card:hover .logo,
-.card:hover .logoRect {
+.card.activeCard .logo,
+.card:hover .logoRect,
+.card.activeCard .logoRect {
   transform: scale(1.08);
   filter: brightness(1.1);
 }
 
-
 /* =========================
    RESPONSIVE
 ========================= */
+
+@media (max-width: 1600px) {
+  .container {
+    max-width: 90%;
+  }
+}
 
 @media (max-width: 900px) {
   .grid {
@@ -173,7 +169,6 @@
 }
 
 @media (max-width: 500px) {
-
   .grid {
     grid-template-columns: 1fr;
   }
@@ -182,10 +177,8 @@
     font-size: 2.1rem;
   }
 
-}
-
-@media (max-width: 1600px) {
-  .container {
-    max-width: 90%;
+  /* Sur très petit écran, on peut réduire un peu le padding pour gagner de la place */
+  .card {
+    padding: 1.4rem;
   }
 }
