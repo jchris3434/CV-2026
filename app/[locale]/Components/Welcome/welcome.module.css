@@ -86,13 +86,20 @@ body {
 
 @media (max-width: 900px) {
 
+  .name {
+    font-size: 2rem; /* Ton nom repasse à 2rem ici */
+    margin-bottom: 0.5rem;
+  }
+
   .globaleSection {
     flex-direction: column;
-    justify-content: center;
+    /* On change center par flex-start pour remonter le contenu */
+    justify-content: flex-start; 
     align-items: center;
     text-align: center;
-    /* height: auto; */
-    padding: 2rem 0;
+    /* On ajoute un padding-top pour décoller du haut sans être au milieu */
+    padding-top: 4rem; 
+    min-height: calc(100vh - 4rem);
   }
 
   /* Image en haut */
@@ -101,7 +108,10 @@ body {
     width: 100%;
     display: flex;
     justify-content: center;
-    margin-bottom: 1rem;
+    /* On réduit ou ajuste la marge sous l'image */
+    margin-bottom: 2rem; 
+    /* Supprime toute contrainte de flex grow pour ne pas occuper l'espace inutilement */
+    flex: 0 1 auto;
   }
 
   /* Texte en dessous */
@@ -110,20 +120,21 @@ body {
     width: 100%;
     align-items: center;
     gap: 0.5rem;
+    /* On s'assure que le texte ne soit pas poussé tout en bas */
+    flex: 0 1 auto;
   }
 
   .imageLeft {
     height: auto;
-    max-height: 14rem;
+    /* On peut agrandir un peu si besoin, ou rester à 14rem */
+    max-height: 18rem; 
     width: auto;
     animation: none;
   }
 
-  .name {
-    font-size: 2rem;
-  }
-
   .jobTitleContainer {
-    font-size: 1.5rem;
-  }
+  min-height: 1.5em;
+  font-size: 2rem;
+  padding-top: 1.3rem;
+}
 }
