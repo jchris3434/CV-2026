@@ -5,6 +5,9 @@ import Image from 'next/image';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 import { useTranslations } from 'next-intl';
+import { makeSpanRenderer } from '../../utils/renderers';
+
+const renderImportant = makeSpanRenderer(styles.spanBold);
 
 export default function Conception() {
   const [emblaRef] = useEmblaCarousel(
@@ -32,7 +35,7 @@ export default function Conception() {
           <div className={styles.embla} ref={emblaRef}>
             <div className={styles.emblaContainer}>
               {images.map((img, index) => (
-                <div className={`${styles.emblaSlide} ${styles[img.variant]}`} key={index}>
+                <div className={`${styles.emblaSlide} ${styles[img.variant]}`} key={img.src}>
                   <Image
                     src={img.src}
                     alt={`Diagramme UML ${index + 1}`}
@@ -51,10 +54,10 @@ export default function Conception() {
           <h1 className={styles.maintitle}>{t('title')}</h1>
           <h2 className={styles.title}>{t('conceptionTitle')}</h2>
 
-          <p>{t.rich('conceptionDescription.step1', { important: (chunks) => <span className={styles.spanBold}>{chunks}</span> })}</p>
-          <p>{t.rich('conceptionDescription.step2', { important: (chunks) => <span className={styles.spanBold}>{chunks}</span> })}</p>
-          <p>{t.rich('conceptionDescription.step3', { important: (chunks) => <span className={styles.spanBold}>{chunks}</span> })}</p>
-          <p>{t.rich('conceptionDescription.step4', { important: (chunks) => <span className={styles.spanBold}>{chunks}</span> })}</p>
+          <p>{t.rich('conceptionDescription.step1', { important: renderImportant })}</p>
+          <p>{t.rich('conceptionDescription.step2', { important: renderImportant })}</p>
+          <p>{t.rich('conceptionDescription.step3', { important: renderImportant })}</p>
+          <p>{t.rich('conceptionDescription.step4', { important: renderImportant })}</p>
         </div>
       </div>
     </section>

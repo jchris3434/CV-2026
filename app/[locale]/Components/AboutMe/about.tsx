@@ -3,6 +3,9 @@
 import styles from './about.module.css';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
+import { makeSpanRenderer } from '../../utils/renderers';
+
+const renderImportant = makeSpanRenderer(styles.spanBold);
 
 export default function AboutMe() {
   const t = useTranslations('aboutMe');
@@ -13,35 +16,19 @@ export default function AboutMe() {
         <h1 className={styles.spanTitle}>{t('title')}</h1>
 
         <p className={styles.spanPassion}>
-          {t.rich('passion', {
-            important: (chunks) => (
-              <span className={styles.spanBold}>{chunks}</span>
-            )
-          })}
+          {t.rich('passion', { important: renderImportant })}
         </p>
 
         <p>
-          {t.rich('reconversion', {
-            important: (chunks) => (
-              <span className={styles.spanBold}>{chunks}</span>
-            )
-          })}
+          {t.rich('reconversion', { important: renderImportant })}
         </p>
 
         <p>
-          {t.rich('experience', {
-            important: (chunks) => (
-              <span className={styles.spanBold}>{chunks}</span>
-            )
-          })}
+          {t.rich('experience', { important: renderImportant })}
         </p>
 
         <p>
-          {t.rich('dsio', {
-            important: (chunks) => (
-              <span className={styles.spanBold}>{chunks}</span>
-            )
-          })}
+          {t.rich('dsio', { important: renderImportant })}
         </p>
       </div>
 

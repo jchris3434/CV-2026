@@ -4,30 +4,29 @@ body {
 
 .globaleSection {
   height: calc(100vh - 4rem);
-  width: 90%;                
-  margin: 0 auto;           
-  display: flex;            
-  justify-content: space-between; 
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
 }
 
 .divLeft {
-  width: 45%;                
-  /* background-color: lightgray;  */  
-  display: flex;              
-  justify-content: center;   
-  align-items: center;        
+  width: 45%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .imageLeft {
-  width: auto;   
-  max-height: 31rem;   
-  /* object-fit: contain; */
+  width: auto;
+  height: 32rem;
+  object-fit: contain;
+  animation: imageZoomRotate 2s ease-out forwards;
 }
 
 .divRight {
-  width: 55%;                
-  /* background-color: lightblue;  */
-  display: flex; 
+  width: 55%;
+  display: flex;
   justify-content: center;
   flex-direction: column;
   gap: 0.8rem;
@@ -51,33 +50,20 @@ body {
   display: inline-block;
   min-height: 1.5em;
   transition: opacity 0.5s ease;
+  font-size: 2.3rem;
+  color: transparent;
+  background: linear-gradient(90deg, #ff6a00, #ff78b9, #378ffb);
+  background-clip: text;
 }
 
 /* Animation de rotation rapide et agrandissement */
 @keyframes imageZoomRotate {
   0% {
-    transform: scale(0.2) rotate(0deg); /* Début - petite taille et non tournée */
+    transform: scale(0.2) rotate(0deg);
   }
   100% {
-    transform: scale(1) rotate(1440deg); /* Fin - taille normale après 4 rotations complètes */
+    transform: scale(1) rotate(1440deg);
   }
-}
-
-.imageLeft {
-  width: auto;
-  height: 32rem; /* Hauteur de l'image */
-  object-fit: contain;
-  animation: imageZoomRotate 2s ease-out forwards; /* Animation rapide */
-}
-
-.jobTitleContainer {
-  display: inline-block;
-  min-height: 1.5em;
-  transition: opacity 0.5s ease;  
-  font-size: 2.3rem;
-  color: transparent; /* Rendre le texte transparent pour voir le gradient */
-  background: linear-gradient(90deg, #ff6a00, #ff78b9, #378ffb); 
-  background-clip: text; /* Applique le gradient au texte */
 }
 
 /* =========================
@@ -87,18 +73,16 @@ body {
 @media (max-width: 900px) {
 
   .name {
-    font-size: 2rem; /* Ton nom repasse à 2rem ici */
+    font-size: 2rem;
     margin-bottom: 0.5rem;
   }
 
   .globaleSection {
     flex-direction: column;
-    /* On change center par flex-start pour remonter le contenu */
-    justify-content: flex-start; 
+    justify-content: flex-start;
     align-items: center;
     text-align: center;
-    /* On ajoute un padding-top pour décoller du haut sans être au milieu */
-    padding-top: 4rem; 
+    padding-top: 4rem;
     min-height: calc(100vh - 4rem);
   }
 
@@ -108,9 +92,7 @@ body {
     width: 100%;
     display: flex;
     justify-content: center;
-    /* On réduit ou ajuste la marge sous l'image */
-    margin-bottom: 2rem; 
-    /* Supprime toute contrainte de flex grow pour ne pas occuper l'espace inutilement */
+    margin-bottom: 2rem;
     flex: 0 1 auto;
   }
 
@@ -120,21 +102,19 @@ body {
     width: 100%;
     align-items: center;
     gap: 0.5rem;
-    /* On s'assure que le texte ne soit pas poussé tout en bas */
     flex: 0 1 auto;
   }
 
   .imageLeft {
     height: auto;
-    /* On peut agrandir un peu si besoin, ou rester à 14rem */
-    max-height: 18rem; 
+    max-height: 18rem;
     width: auto;
     animation: none;
   }
 
   .jobTitleContainer {
-  min-height: 1.5em;
-  font-size: 2rem;
-  padding-top: 1.3rem;
-}
+    min-height: 1.5em;
+    font-size: 2rem;
+    padding-top: 1.3rem;
+  }
 }

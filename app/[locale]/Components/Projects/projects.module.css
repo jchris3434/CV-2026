@@ -51,6 +51,9 @@
   cursor: pointer;
   border-radius: 0.75rem;
   overflow: hidden;
+  border: none;
+  background: none;
+  padding: 0;
 }
 
 .thumbnailImage {
