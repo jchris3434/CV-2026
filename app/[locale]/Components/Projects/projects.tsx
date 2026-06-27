@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl';
 import styles from './projects.module.css';
 
 type Project = {
-  key: string; // clé pour traduire le titre
+  key: string;
   video: string;
   thumbnail: string;
 };
@@ -30,9 +30,13 @@ export default function Projects() {
       <div className={styles.container}>
         <h1 className={styles.title}>{t('sectionTitle')}</h1>
         <div className={styles.grid}>
-          {projects.map((project, index) => (
-            <div key={index} className={styles.card}>
-              <div className={styles.thumbnail} onClick={() => setActiveProject(project)}>
+          {projects.map((project) => (
+            <div key={project.key} className={styles.card}>
+              <button
+                type="button"
+                className={styles.thumbnail}
+                onClick={() => setActiveProject(project)}
+              >
                 <Image
                   src={project.thumbnail}
                   alt={t(`items.${project.key}`)}
@@ -45,7 +49,7 @@ export default function Projects() {
                     <polygon points="8,4 8,20 20,12" />
                   </svg>
                 </div>
-              </div>
+              </button>
               <h3>{t(`items.${project.key}`)}</h3>
             </div>
           ))}
@@ -58,6 +62,7 @@ export default function Projects() {
             <button className={styles.closeButton} onClick={() => setActiveProject(null)}>✕</button>
             <video className={styles.modalVideo} controls autoPlay>
               <source src={activeProject.video} type="video/mp4" />
+              <track kind="captions" />
             </video>
             <h2 className={styles.modalTitle}>{t(`items.${activeProject.key}`)}</h2>
           </div>

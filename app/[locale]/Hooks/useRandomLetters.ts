@@ -1,19 +1,19 @@
 import { useEffect, useState } from 'react';
 
+function getSecureRandomIndex(max: number) {
+  const array = new Uint32Array(1);
+  globalThis.crypto.getRandomValues(array);
+  return array[0] % max;
+}
+
 export function useRandomLetters(text: string, delay = 120) {
   const [visibility, setVisibility] = useState<number[]>(
-    Array(text.length).fill(0)
+    new Array(text.length).fill(0)
   );
   const [isDone, setIsDone] = useState(false);
 
-  function getSecureRandomIndex(max: number) {
-    const array = new Uint32Array(1);
-    window.crypto.getRandomValues(array);
-    return array[0] % max;
-  }
-
   useEffect(() => {
-    setVisibility(Array(text.length).fill(0));
+    setVisibility(new Array(text.length).fill(0));
     setIsDone(false);
 
     const timeouts: NodeJS.Timeout[] = [];
