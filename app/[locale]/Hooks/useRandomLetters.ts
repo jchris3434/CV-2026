@@ -7,36 +7,32 @@ function getSecureRandomIndex(max: number) {
 }
 
 export function useRandomLetters(text: string, delay = 120) {
-  const [visibility, setVisibility] = useState<number[]>(
-    new Array(text.length).fill(0)
-  );
-  const [isDone, setIsDone] = useState(false);
+  // La visibilité est associée au texte : un changement de texte repart de zéro
+  // sans appeler setState de façon synchrone dans l'effet.
+  const [state, setState] = useState<{ text: string; visibility: number[] }>({
+    text,
+    visibility: new Array(text.length).fill(0),
+  });
+  const visibility =
+    state.text === text ? state.visibility : new Array(text.length).fill(0);
+  const isDone = visibility.length > 0 && visibility.every(v => v === 1);
 
   useEffect(() => {
-    setVisibility(new Array(text.length).fill(0));
-    setIsDone(false);
-
     const timeouts: NodeJS.Timeout[] = [];
     const indexes = Array.from({ length: text.length }, (_, i) => i);
-
-    let revealedCount = 0;
 
     while (indexes.length > 0) {
       const randomIndex = getSecureRandomIndex(indexes.length);
       const letterIndex = indexes.splice(randomIndex, 1)[0];
 
       const timeout = setTimeout(() => {
-        setVisibility(prev => {
-          const next = [...prev];
-          if (next[letterIndex] === 0) {
-            next[letterIndex] = 1;
-            revealedCount++;
-
-            if (revealedCount === text.length) {
-              setIsDone(true);
-            }
-          }
-          return next;
+        setState(prev => {
+          const base =
+            prev.text === text ? prev.visibility : new Array(text.length).fill(0);
+          if (base[letterIndex] === 1) return prev;
+          const next = [...base];
+          next[letterIndex] = 1;
+          return { text, visibility: next };
         });
       }, randomIndex * delay);
 
