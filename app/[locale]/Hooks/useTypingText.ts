@@ -1,20 +1,22 @@
 import { useEffect, useState } from 'react';
 
 export function useTypingText(text: string, speed = 70, enabled = true) {
-  const [visibleCount, setVisibleCount] = useState(0);
+  // Le compteur est associé au texte : un changement de texte repart de 0
+  // sans appeler setState de façon synchrone dans l'effet.
+  const [state, setState] = useState({ text, count: 0 });
+  const visibleCount = state.text === text ? state.count : 0;
 
   useEffect(() => {
     if (!enabled) return;
 
-    setVisibleCount(0);
-
     const interval = setInterval(() => {
-      setVisibleCount(prev => {
-        if (prev >= text.length) {
+      setState(prev => {
+        const count = prev.text === text ? prev.count : 0;
+        if (count >= text.length) {
           clearInterval(interval);
-          return prev;
+          return prev.text === text ? prev : { text, count };
         }
-        return prev + 1;
+        return { text, count: count + 1 };
       });
     }, speed);
 

@@ -71,7 +71,7 @@ export default function Navbar() {
                                         smooth spy to={section}
                                         onClick={closeMenu} // Ferme le menu au clic
                                     >
-                                        {t(`navbar.${sectionKeys[section]}` as any)}
+                                        {t(`navbar.${sectionKeys[section]}` as Parameters<typeof t>[0])}
                                     </Link>
                                 </li>
                             );
