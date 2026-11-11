@@ -1,0 +1,19 @@
+.glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 44rem;
+  height: 44rem;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(closest-side, var(--glow), transparent);
+  opacity: 0;
+  transform: translate3d(calc(var(--x, 50vw) - 50%), calc(var(--y, 50vh) - 50%), 0);
+  transition: opacity 0.8s ease;
+  will-change: transform;
+}
+
+.glow[data-active] {
+  opacity: 1;
+}

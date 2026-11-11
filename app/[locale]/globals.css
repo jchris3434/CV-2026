@@ -1,31 +1,333 @@
-@import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Funnel+Sans:wght@300&display=swap');
+/* =========================================================
+   Thème « Volcan & Lagon »
+   Jetons de couleur, base typographique et transitions de vue.
+   Nuit par défaut, jour avec html[data-theme='light'].
+   ========================================================= */
 
+@property --angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: dark;
+
+  --bg: #0a0d14;
+  --bg-soft: #0e121b;
+  --surface: #121824;
+  --surface-strong: #1a2231;
+  --text: #eef1f6;
+  --text-muted: #a3adbf;
+  --text-faint: #7d879c;
+  --border: rgb(255 255 255 / 0.09);
+  --border-strong: rgb(255 255 255 / 0.2);
+
+  --lagoon: #2fd0e6;
+  --sky: #5aa2ff;
+  --coral: #ff6f9c;
+  --lava: #ff7a2f;
+  --gradient: linear-gradient(90deg, var(--lava), var(--coral) 50%, var(--sky));
+
+  --glow: rgb(47 208 230 / 0.09);
+  --tile: #f1f3f6;
+  --shadow: 0 24px 60px -24px rgb(0 0 0 / 0.75);
+  --grain-opacity: 0.06;
+  --aurora-opacity: 0.5;
+
+  --topo-low: #2fd0e6;
+  --topo-mid: #ff6f9c;
+  --topo-high: #ff7a2f;
+  --topo-alpha: 0.5;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --container: 75rem;
+  --gutter: clamp(1.25rem, 5vw, 3rem);
+  --section-space: clamp(5rem, 12vh, 8.5rem);
+  --radius: 1.25rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+:root[data-theme='light'] {
+  color-scheme: light;
+
+  --bg: #ffffff;
+  --bg-soft: #f4f6f9;
+  --surface: #ffffff;
+  --surface-strong: #f7f8fa;
+  --text: #141a26;
+  --text-muted: #4d5768;
+  --text-faint: #667085;
+  --border: rgb(20 26 38 / 0.1);
+  --border-strong: rgb(20 26 38 / 0.22);
+
+  --lagoon: #08748c;
+  --sky: #1c64d9;
+  --coral: #d6336c;
+  --lava: #d9480f;
+
+  --glow: rgb(217 72 15 / 0.07);
+  --tile: #ffffff;
+  --shadow: 0 24px 60px -28px rgb(20 26 38 / 0.28);
+  --grain-opacity: 0.045;
+  --aurora-opacity: 0.32;
+
+  --topo-low: #0a8fab;
+  --topo-mid: #d6336c;
+  --topo-high: #e8590c;
+  --topo-alpha: 0.42;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ---------- Base ---------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  text-size-adjust: 100%;
+  scrollbar-gutter: stable;
+  scrollbar-color: var(--border-strong) transparent;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: clip;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+p,
+ul,
+figure {
+  margin: 0;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+img,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--lagoon);
+  outline-offset: 3px;
+  border-radius: 0.375rem;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--coral) 45%, transparent);
+  color: var(--text);
+}
+
+/* ---------- Titre de section (partagé par toutes les sections) ---------- */
+
+.section-title {
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+  color: var(--text);
+}
+
+.section-title::before {
+  content: '';
+  display: block;
+  width: 3.5rem;
+  height: 4px;
+  margin-bottom: 1.4rem;
+  border-radius: 4px;
+  background: var(--gradient);
+}
+
+/* ---------- Cadre de page : grain de fond ---------- */
+
+.page {
+  position: relative;
+  isolation: isolate;
+}
+
+.page::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: var(--grain-opacity);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.5  0 0 0 0 0.5  0 0 0 0 0.5  0 0 0 1 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* ---------- Apparition au défilement (voir Components/Reveal) ---------- */
+
+html[data-js] [data-reveal] {
+  opacity: 0;
+  transition:
+    opacity 0.9s var(--ease-out) var(--reveal-delay, 0ms),
+    transform 0.9s var(--ease-out) var(--reveal-delay, 0ms),
+    filter 0.9s var(--ease-out) var(--reveal-delay, 0ms);
+}
+
+html[data-js] [data-reveal='up'] {
+  transform: translateY(2rem);
+}
+
+html[data-js] [data-reveal='left'] {
+  transform: translateX(-2.5rem);
+}
+
+html[data-js] [data-reveal='right'] {
+  transform: translateX(2.5rem);
+}
+
+html[data-js] [data-reveal='zoom'] {
+  transform: scale(0.94);
+  filter: blur(8px);
+}
+
+html[data-js] [data-reveal][data-revealed] {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+/* ---------- Transitions de vue ---------- */
+
+::view-transition {
+  pointer-events: none;
+}
+
+/* Bascule de thème : le nouveau thème s'ouvre en cercle depuis le bouton. */
+html[data-theme-switch]::view-transition-old(root),
+html[data-theme-switch]::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+html[data-theme-switch]::view-transition-old(root) {
+  z-index: 0;
+}
+
+html[data-theme-switch]::view-transition-new(root) {
+  z-index: 1;
+}
+
+html[data-theme-switch] *,
+html[data-theme-switch] *::before,
+html[data-theme-switch] *::after {
+  transition: none !important;
+}
+
+/* Fenêtre vidéo d'un projet (voir Components/Projects) : la page reste
+   immobile, le fond de la fenêtre apparaît en fondu et la vignette se
+   transforme en lecteur. */
+html[data-lightbox-open]::view-transition-old(root),
+html[data-lightbox-close]::view-transition-old(root) {
+  display: none;
+}
+
+html[data-lightbox-open]::view-transition-new(root),
+html[data-lightbox-close]::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-group(lightbox) {
+  animation-duration: 0.5s;
+  animation-timing-function: var(--ease-out);
+}
+
+/* Le cadre en mouvement passe devant le fond de la fenêtre. */
+::view-transition-group(project-media) {
+  z-index: 1;
+  animation-duration: 0.5s;
+  animation-timing-function: var(--ease-out);
+}
+
+/* Vignette et lecteur n'ont pas les mêmes proportions : chacune des deux
+   images remplit le cadre en mouvement, et ce qui dépasse est rogné.
+   Pas de fondu croisé (deux cadrages différents se dédoubleraient) : l'image
+   d'arrivée est simplement posée sur l'image de départ. */
+::view-transition-old(project-media),
+::view-transition-new(project-media) {
+  height: 100%;
+  overflow: clip;
+  border-radius: var(--radius);
+  object-fit: cover;
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* Au retour, la vignette n'apparaît qu'une fois le cadre presque à sa place :
+   la dernière image de la vidéo s'y fond sans décalage. */
+html[data-lightbox-close]::view-transition-new(project-media) {
+  animation: appear-late 0.5s linear both;
+}
+
+@keyframes appear-late {
+  0%,
+  45% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 
-html, body {
-  height: 100%;          /* Garantir que html et body occupent toute la hauteur */
-  margin: 0;             /* Réinitialiser la marge par défaut */
-  padding: 0;            /* Réinitialiser le padding par défaut */
-  overflow-x: hidden;    /* Eviter le défilement horizontal */
-  font-family: 'Funnel Sans', sans-serif;
-  scroll-behavior: smooth;
+/* ---------- Mouvement réduit ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html[data-js] [data-reveal] {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
 }

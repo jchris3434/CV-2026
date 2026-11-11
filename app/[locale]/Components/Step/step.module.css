@@ -1,0 +1,193 @@
+.step {
+  --from: var(--lagoon);
+  --to: var(--sky);
+
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(13rem, 19rem) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  padding: 0 0 clamp(4.5rem, 10vh, 7.5rem) clamp(1.75rem, 4vw, 3.5rem);
+}
+
+/* La ligne passe du lagon (conception) à la lave (mise en production). */
+.step[data-step='2'] {
+  --from: var(--sky);
+  --to: var(--coral);
+}
+
+.step[data-step='3'] {
+  --from: var(--coral);
+  --to: var(--lava);
+}
+
+.step[data-step='4'] {
+  --from: var(--lava);
+  --to: var(--lava);
+}
+
+/* ---------- Ligne de progression ---------- */
+
+.line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 2px;
+  background: var(--border);
+}
+
+.fill {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, var(--from), var(--to));
+  opacity: 0.45;
+  transform-origin: 50% 0;
+}
+
+.node {
+  position: absolute;
+  top: 0.35rem;
+  left: 1px;
+  width: 0.9rem;
+  height: 0.9rem;
+  border: 2px solid var(--from);
+  border-radius: 50%;
+  background: var(--bg);
+  translate: -50% 0;
+}
+
+/* Défilement piloté en CSS : la ligne se remplit à mesure que l'étape
+   traverse le milieu de l'écran, et la pastille s'allume à son passage. */
+@supports (animation-timeline: view()) {
+  .fill {
+    opacity: 1;
+    transform: scaleY(0);
+    animation: fill linear both;
+    animation-timeline: view();
+    animation-range: entry 50% exit 50%;
+  }
+
+  .node {
+    animation: light linear both;
+    animation-timeline: view();
+    animation-range: cover 42% cover 50%;
+  }
+}
+
+@keyframes fill {
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes light {
+  to {
+    background: var(--from);
+    box-shadow: 0 0 0 0.35rem color-mix(in srgb, var(--from) 22%, transparent);
+  }
+}
+
+/* ---------- En-tête accroché ---------- */
+
+.head {
+  position: sticky;
+  top: 6.5rem;
+  align-self: start;
+}
+
+.number {
+  display: block;
+  margin-bottom: 0.6rem;
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(3.2rem, 6vw, 5rem);
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--from);
+}
+
+.eyebrow {
+  margin-bottom: 0.5rem;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.72rem;
+  line-height: 1.5;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.title {
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+}
+
+.body {
+  min-width: 0;
+}
+
+/* ---------- Styles partagés par le contenu des étapes ---------- */
+
+/* Paragraphes : les mots-clés prennent le dégradé lave, corail et ciel. */
+.prose {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  max-width: 42rem;
+  color: var(--text-muted);
+}
+
+.prose strong {
+  font-weight: 600;
+  background: var(--gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Tuile claire : les logos restent lisibles quel que soit le thème.
+   La piste « minmax(0, 1fr) » borne le logo à la tuile : une piste automatique
+   prendrait la hauteur naturelle de l'image et la laisserait déborder. */
+.tile {
+  display: grid;
+  flex: none;
+  grid-template: minmax(0, 1fr) / minmax(0, 1fr);
+  width: 7.5rem;
+  height: 4.5rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: var(--tile);
+}
+
+/* « multiply » : le fond blanc incrusté de certains logos prend la teinte de la tuile. */
+.tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fill,
+  .node {
+    animation: none;
+    transform: none;
+  }
+}
+
+/* ===== Responsive ===== */
+
+@media (max-width: 900px) {
+  .step {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+
+  .head {
+    position: static;
+  }
+}

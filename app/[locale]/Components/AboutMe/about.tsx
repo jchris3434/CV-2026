@@ -2,44 +2,36 @@
 
 import styles from './about.module.css';
 import { useTranslations } from 'next-intl';
-import Image from 'next/image';
+import Reveal from '../Reveal/reveal';
 import { makeSpanRenderer } from '../../utils/renderers';
 
 const renderImportant = makeSpanRenderer(styles.spanBold);
+
+const paragraphs = ['reconversion', 'experience', 'dsio'] as const;
 
 export default function AboutMe() {
   const t = useTranslations('aboutMe');
 
   return (
     <section id="about-me" className={styles.sectionAbout}>
-      <div className={styles.divLeft}>
-        <h1 className={styles.spanTitle}>{t('title')}</h1>
+      <div className={styles.inner}>
+        <div className={styles.divLeft}>
+          <Reveal>
+            <h1 className={`section-title ${styles.spanTitle}`}>{t('title')}</h1>
+          </Reveal>
 
-        <p className={styles.spanPassion}>
-          {t.rich('passion', { important: renderImportant })}
-        </p>
+          <Reveal delay={80}>
+            <p className={styles.spanPassion}>
+              {t.rich('passion', { important: renderImportant })}
+            </p>
+          </Reveal>
 
-        <p>
-          {t.rich('reconversion', { important: renderImportant })}
-        </p>
-
-        <p>
-          {t.rich('experience', { important: renderImportant })}
-        </p>
-
-        <p>
-          {t.rich('dsio', { important: renderImportant })}
-        </p>
-      </div>
-
-      <div className={styles.divRight}>
-        <Image
-          src="/images/aboutMe-NoBG.png"
-          width={6016}
-          height={4016}
-          alt="Picture of the author"
-          className={styles.imageLeft}
-        />
+          {paragraphs.map((key, index) => (
+            <Reveal key={key} delay={140 + index * 70}>
+              <p>{t.rich(key, { important: renderImportant })}</p>
+            </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   );
