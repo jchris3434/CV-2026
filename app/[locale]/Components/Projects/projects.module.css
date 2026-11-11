@@ -1,174 +1,312 @@
 /* Container & Grid */
 .projects {
-  padding: 4rem 0;
-  display: flex;
-  justify-content: center;
+  padding: var(--section-space) var(--gutter);
 }
 
 .container {
-  width: 80%;
-  text-align: center;
+  width: min(100%, var(--container));
+  margin-inline: auto;
 }
 
 .title {
-  font-size: 2.5rem;
-  margin-bottom: 3rem;
-  font-weight: 700;
+  margin-bottom: clamp(2.5rem, 6vh, 4rem);
 }
 
+/* Grille « bento » : une grande vignette, quatre petites, deux moyennes. */
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.cell {
+  display: grid;
+  aspect-ratio: 4 / 3;
+}
+
+.cell:first-child {
+  grid-column: span 2;
+  grid-row: span 2;
+  aspect-ratio: auto;
+}
+
+.cell:nth-child(n + 6) {
+  grid-column: span 2;
+  aspect-ratio: 16 / 9;
 }
 
 /* Cards */
 .card {
-  text-align: center;
-  border-radius: 1rem;
-  padding: 1rem;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(0.5rem);
-  border: 0.0625rem solid rgba(255, 255, 255, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-strong);
+  transition:
+    transform 0.5s var(--ease-out),
+    box-shadow 0.5s ease,
+    border-color 0.3s ease;
 }
 
 .card:hover {
-  transform: translateY(-0.375rem) scale(1.02);
-  box-shadow: 0 0.9375rem 1.875rem rgba(0,0,0,0.3), 0 0 1.25rem rgba(76,150,255,0.2);
+  transform: translateY(-4px);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow);
 }
 
-.card h3 {
-  margin-top: 0.5rem;
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #333;
+/* Reflet qui suit le pointeur (variables posées par trackPointer). */
+.card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    22rem circle at var(--mx, 50%) var(--my, 50%),
+    rgb(255 255 255 / 0.16),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.card:hover::after {
+  opacity: 1;
 }
 
 /* Thumbnail & Play Button */
 .thumbnail {
-  position: relative;
-  cursor: pointer;
-  border-radius: 0.75rem;
-  overflow: hidden;
-  border: none;
-  background: none;
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
   padding: 0;
+  border: 0;
+  border-radius: inherit;
+  background: none;
+}
+
+/* La carte coupe ce qui dépasse : le contour de focus passe à l'intérieur. */
+.thumbnail:focus-visible {
+  outline-offset: -4px;
+}
+
+/* Voile sombre en bas de la vignette : le titre reste lisible sur toute image. */
+.thumbnail::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgb(6 9 15 / 0.9),
+    rgb(6 9 15 / 0.4) 36%,
+    transparent 62%
+  );
+  pointer-events: none;
+}
+
+.media {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+/* La vignette est « partie » dans la fenêtre vidéo : sa place reste vide. */
+.mediaAway {
+  opacity: 0;
 }
 
 .thumbnailImage {
   width: 100%;
-  height: auto;
-  display: block;
-  transition: transform 0.3s ease;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.9s var(--ease-out);
 }
 
-.thumbnail:hover .thumbnailImage {
-  transform: scale(1.05);
+.card:hover .thumbnailImage {
+  transform: scale(1.06);
 }
 
 .playButton {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  width: 3.125rem;   /* 50px -> 3.125rem */
-  height: 3.125rem;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  border: 1px solid rgb(255 255 255 / 0.4);
   border-radius: 50%;
-  background: rgba(0,0,0,0.6);
+  background: rgb(10 13 20 / 0.55);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  translate: -50% -50%;
+  transition:
+    scale 0.5s var(--ease-out),
+    background-color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.playButton svg {
+  width: 1.2rem;
+  height: 1.2rem;
+  fill: currentColor;
+}
+
+.card:hover .playButton {
+  border-color: transparent;
+  background: var(--coral);
+  scale: 1.18;
+}
+
+.cell:first-child .playButton {
+  width: 4.5rem;
+  height: 4.5rem;
+}
+
+.cell:first-child .playButton svg {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+/* Légende posée sur la vignette (le clic la traverse jusqu'au bouton). */
+.caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  box-shadow: 0 0 0.5rem rgba(0,0,0,0.4);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  align-items: baseline;
+  gap: 0.7rem;
+  padding: 1rem 1.15rem;
+  color: #fff;
+  pointer-events: none;
 }
 
-.thumbnail:hover .playButton {
-  transform: translate(-50%, -50%) scale(1.2);
-  box-shadow: 0 0 0.9375rem rgba(76,177,250,0.8);
+.index {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: rgb(255 255 255 / 0.75);
 }
 
-.video {
-  width: 100%;
-  border-radius: 0.75rem;
+.cardTitle {
+  font-family: var(--font-display), sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
 }
 
-/* Modal fullscreen */
+.cell:first-child .caption {
+  padding: 1.5rem 1.6rem;
+}
+
+.cell:first-child .cardTitle {
+  font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+}
+
+/* Modal fullscreen : salle obscure, quel que soit le thème. */
 .modal {
   position: fixed;
-  top: 0;
-  left: 0;
+  inset: 0;
+  z-index: 1000;
   width: 100%;
+  max-width: none;
   height: 100%;
-  background: rgba(0,0,0,0.85);
-  backdrop-filter: blur(0.5rem);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-  animation: fadeIn 0.3s ease;
+  max-height: none;
+  margin: 0;
+  padding: clamp(1rem, 4vw, 3rem);
+  overflow: auto;
+  border: 0;
+  background: rgb(6 9 15 / 0.92);
+  color: #fff;
 }
 
+.modal[open] {
+  display: grid;
+  place-items: center;
+}
+
+.modal::backdrop {
+  background: transparent;
+}
+
+/* Sans transitions de vue (anciens navigateurs), un simple fondu. */
+@supports not (view-transition-name: none) {
+  .modal {
+    animation: fadeIn 0.3s ease both;
+  }
+}
+
+/* La largeur est bornée pour que la vidéo tienne toujours dans la hauteur. */
 .modalContent {
-  position: relative;
-  max-width: 90%;
-  max-height: 90%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 1rem;
+  width: min(100%, 72rem, calc((100dvh - 12rem) * var(--ratio, 1.7778)));
 }
 
+/* Pas de fond noir : tant que l'image d'attente n'est pas chargée, la vignette
+   qui vient de s'agrandir reste visible à travers le lecteur. */
 .modalVideo {
   width: 100%;
-  max-height: 80vh;
-  border-radius: 0.75rem;
-  box-shadow: 0 0.625rem 1.875rem rgba(0,0,0,0.5);
+  aspect-ratio: var(--ratio, 16 / 9);
+  border-radius: var(--radius);
+  box-shadow: 0 2rem 5rem -1.5rem rgb(0 0 0 / 0.9);
 }
 
 .modalTitle {
-  margin-top: 0.625rem;
-  font-size: 1.8rem;
-  color: #fff;
-  text-shadow: 0 0.125rem 0.375rem rgba(0,0,0,0.7);
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(1.2rem, 2.4vw, 1.6rem);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
 }
 
 .closeButton {
   position: absolute;
-  top: 0.625rem;
-  right: 0.625rem;
-  background: rgba(255,255,255,0.2);
-  border: none;
-  color: black;
-  font-size: 1.5rem;
+  top: clamp(0.75rem, 2vw, 1.5rem);
+  right: clamp(0.75rem, 2vw, 1.5rem);
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 1px solid rgb(255 255 255 / 0.25);
   border-radius: 50%;
-  width: 2.1875rem;
-  height: 2.1875rem;
-  cursor: pointer;
-  transition: background 0.2s ease;
-  z-index: 1001;
+  background: rgb(255 255 255 / 0.08);
+  color: #fff;
+  transition:
+    transform 0.4s var(--ease-out),
+    background-color 0.25s ease;
 }
 
 .closeButton:hover {
-  background: rgba(255,255,255,0.5);
+  background: rgb(255 255 255 / 0.2);
+  transform: rotate(90deg);
+}
+
+.closeButton svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
 }
 
 /* Animations */
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-/* Responsive */
-@media (max-width:62.5rem){ /* 1000px */
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
+  from {
+    opacity: 0;
   }
-}
-
-@media (max-width:37.5rem){ /* 600px */
-  .grid {
-    grid-template-columns: 1fr;
+  to {
+    opacity: 1;
   }
 }
 
@@ -176,13 +314,45 @@
    RESPONSIVE
 ========================= */
 
+/* Deux colonnes : la grande vignette prend toute la largeur. */
 @media (max-width: 900px) {
-  .projects {
-    padding: 2rem 0;
+  .cell:first-child {
+    grid-row: auto;
+    aspect-ratio: 16 / 9;
   }
 
-  .container {
-    width: 85%;
+  .cell:nth-child(n + 6) {
+    grid-column: auto;
+    aspect-ratio: 4 / 3;
   }
 
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Une colonne : toutes les vignettes au format de la vidéo. */
+@media (max-width: 560px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cell,
+  .cell:nth-child(n + 6) {
+    aspect-ratio: 16 / 9;
+  }
+
+  .cell:first-child {
+    grid-column: auto;
+  }
+
+  .cell:first-child .playButton {
+    width: 3.25rem;
+    height: 3.25rem;
+  }
+
+  .cell:first-child .playButton svg {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
 }

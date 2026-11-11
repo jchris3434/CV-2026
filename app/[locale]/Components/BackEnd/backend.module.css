@@ -1,86 +1,46 @@
-.backend {
-  width: 90%;
-  min-height: 100vh;
-  margin: 0 auto;  
-  display: flex;
-  justify-content: center;
-}
-
-
-.layout {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* TEXTE */
-
-.center {
-  max-width: 62.5rem; /* 1000px */
-  text-align: center;
-  font-size: 1.1rem;
-  line-height: 1.7;
-}
-
-.maintitle {
-  font-size: 1rem;
-  letter-spacing: 0.125rem;
-  text-transform: uppercase;
-  opacity: 0.6;
-}
-
-.title {
-  font-size: 3rem;
-  font-weight: bold;
-  margin-bottom: 1.5rem;
-}
-
-.center p {
-  margin-bottom: 1.2rem;
-  text-align: justify;
-}
-
-.center p:first-of-type {
-  text-align: left;
-}
-
 /* LOGOS */
 
 .logosWrapper {
-  max-width: 62.5rem; /* même largeur que le texte */
-  width: 100%;
-  margin-top: 3rem;
-  overflow: hidden;
+  /* Même largeur que les paragraphes (voir .prose dans step.module.css). */
+  max-width: 42rem;
+  margin-top: 2.5rem;
 }
 
+/* Front-End : même largeur que les cartes DevOps juste en dessous. */
+.logosFull {
+  max-width: none;
+}
+
+/* Bandeau défilant : les bords s'estompent pour un défilement sans couture. */
 .marquee {
-  width: 100%;
   overflow: hidden;
-  position: relative;
+  mask-image: linear-gradient(to right, transparent, #000 9%, #000 91%, transparent);
 }
 
 .track {
   display: flex;
   width: max-content;
-  animation: scroll 50s linear infinite;
+  animation: scroll 46s linear infinite;
 }
 
+/* scroll pour le front sens inverse */
+.trackReverse {
+  animation-direction: reverse;
+}
+
+.marquee:hover .track {
+  animation-play-state: paused;
+}
+
+/* La marge (et non un « gap ») garde deux moitiés de bandeau strictement
+   identiques : la boucle à -50 % retombe exactement sur son point de départ. */
 .logoItem {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 2.5rem; /* 40px */
+  margin-right: 0.9rem;
+  transition: transform 0.4s var(--ease-out);
 }
 
-.logo {
-  object-fit: contain;
-  opacity: 0.85;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-.logo:hover {
-  transform: scale(1.15);
-  opacity: 1;
+.logoItem:hover {
+  transform: translateY(-4px) scale(1.04);
 }
 
 /* animation continue */
@@ -93,59 +53,3 @@
     transform: translateX(-50%);
   }
 }
-
-.marquee:hover .track {
-  animation-play-state: paused;
-}
-
-.center strong {
-  font-weight: 700;
-}
-
-/* scroll pour le front sens inverse : */
-
-@keyframes scrollRight {
-  from {
-    transform: translateX(-50%);
-  }
-  to {
-    transform: translateX(0);
-  }
-}
-
-.trackReverse {
-  display: flex;
-  width: max-content;
-  animation: scrollRight 50s linear infinite;
-}
-
-
-/* ===== Responsive ===== */
-
-@media (max-width: 900px) {
-  .title {
-    width: 100%;
-    font-size: 2rem; /* Réduire la taille du titre sur mobile */
-  }
-  
-  .backend {
-    padding-top: 2rem; /* Moins d'espace en haut sur petit écran */
-  }
-
-  .logoItem {
-    padding: 0 1rem; /* Réduire l'espace entre les logos pour éviter les trous */
-  }
-  .center {
-    width: 90%;
-  }
-
-  .layout {
-    width: 110%;
-  }
-
-  .logosWrapper {
-  width: 90%;
-  overflow: hidden;
-}
-}
-

@@ -20,9 +20,9 @@
   "aboutMe": {
     "title": "KISAW MWÉ ?",    
     "passion": "<important>Jean-Christophe</important>, in développeur web passioné par linformatik é bann teknolozi modèrn.",
-    "reconversion": "Apré plis ki dis an dan lôtel luks a l’international, mon fé in chanjman karyèr an 2022 pou dédiy mon letan a devlopman web. Diplomé <important>Développeur Web & Web Mobile</important>, épi <important>Concepteur Développeur d’Applications (option DevOps)</important>, mon konbin rigueur, sans servis é konpétans teknik.",
+    "reconversion": "Diplomé <important>Développeur Web & Web Mobile</important>, épi <important>Concepteur Développeur d’Applications (option DevOps)</important>, mon konbin rigueur, sans servis é konpétans teknik.",
     "experience": "Mon travay kom développeur front-end dann l’agence digitale <important>Osmova (French Tech)</important> é osi kot <important>Exaprint</important>, kot mon kontribié pou réalis bann prozé inovant é la transformasion numérique.",
-    "dsio": "Azordi, basé lo <important>l’île de La Réunion</important>, kot in parti mon rasinn i trouvé, mon finn réjoint <important>Direction des systèmes d'information et Organisation</important> du <important>Conseil Régional de La Réunion</important>, kot mon partisip dann bann prozé numérique ki in gran enportans pou l’organisation é l’institisyon."
+    "dsio": "Azordi, basé lo <important>l’île de La Réunion</important>, kot in parti mon rasinn i trouvé, mon finn réjoint <important>Direction des Systèmes d'Information</important> du <important>Conseil Régional de La Réunion</important>, kot mon partisip dann bann prozé numérique ki in gran enportans pou l’organisation é l’institisyon. Mon bann mission i lé maintien an kondisyon opérasyonèl é sékirité bann aplikasyon, monitoring é divers otomatizasyon."
   },
   "myTools": {
     "title": "Kouma in prozé i marse ?",
@@ -94,5 +94,10 @@
       "loading": "Anvoi..."
     },
     "thankYou": "Mersi, messaz la finn voye !"
+  },
+  "ui": {
+    "theme": "Sanz tèm",
+    "close": "Fèrm",
+    "home": "Lakaz"
   }
 }

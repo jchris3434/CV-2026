@@ -23,7 +23,9 @@ export default function FrontEnd() {
       stepCount={5}
       images={images}
       reverse
+      fullWidth
       altPrefix="logo front"
+      stepNumber={3}
     />
   );
 }

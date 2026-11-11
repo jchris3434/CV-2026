@@ -4,28 +4,25 @@ import AboutMe from './Components/AboutMe/about';
 import MyTools from './Components/MyTools/mytools';
 import Projects from './Components/Projects/projects';
 import Contact from './Components/Contact/contact';
-import { Funnel_Sans  } from 'next/font/google';
+import CursorGlow from './Components/CursorGlow/cursorglow';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Jean-Christophe Fontaine',
 };
 
-const funnelSans = Funnel_Sans({
-  weight: '300',
-  subsets: ['latin'],
-  display: 'swap',
-});
-
 export default function HomePage() {
   return (
-    <div className={funnelSans.className}>
+    <div className="page">
+      <CursorGlow />
       <Navbar />
-      <Welcome />
-      <AboutMe />
-      <MyTools />
-      <Projects />
-      <Contact />
+      <main>
+        <Welcome />
+        <AboutMe />
+        <MyTools />
+        <Projects />
+        <Contact />
+      </main>
     </div>
   );
 }

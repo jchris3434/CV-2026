@@ -51,4 +51,27 @@ describe('DevOps', () => {
     expect(mockIO).toHaveBeenCalled()
     Object.defineProperty(window, 'innerWidth', { value: 1024, configurable: true, writable: true })
   })
+
+  test('lights up the most visible card on a small screen', () => {
+    Object.defineProperty(window, 'innerWidth', { value: 500, configurable: true, writable: true })
+    const { container } = render(<DevOps />)
+    Object.defineProperty(window, 'innerWidth', { value: 1024, configurable: true, writable: true })
+
+    // Les apparitions au défilement créent aussi des observateurs : celui des
+    // cartes est le seul à surveiller plusieurs seuils.
+    const [onIntersect] = mockIO.mock.calls.find(([, options]) => Array.isArray(options?.threshold)) ?? []
+    // Les modules CSS donnent des noms de classe du type « _card_1a2b3c ».
+    const [first, second] = container.querySelectorAll('[class*="_card_"]')
+
+    onIntersect([
+      { target: first, isIntersecting: true, intersectionRatio: 0.4 },
+      { target: second, isIntersecting: true, intersectionRatio: 0.9 },
+    ])
+    expect(first.className).not.toContain('activeCard')
+    expect(second.className).toContain('activeCard')
+
+    onIntersect([{ target: second, isIntersecting: false, intersectionRatio: 0.2 }])
+    expect(first.className).toContain('activeCard')
+    expect(second.className).not.toContain('activeCard')
+  })
 })

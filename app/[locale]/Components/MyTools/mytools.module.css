@@ -1,13 +1,10 @@
 .sectionMyTools {
-  width: 90%;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;       
-  justify-content: center;  
+  /* Moins d'espace en haut que les autres sections : sur un portable, le bas du
+     carrousel ne doit pas coller à la barre des tâches. */
+  padding: clamp(4.75rem, 10vh, 8.5rem) var(--gutter) 0;
 }
 
 .container {
-  width: 100%;
-  text-align: justify;
+  width: min(100%, var(--container));
+  margin-inline: auto;
 }
-

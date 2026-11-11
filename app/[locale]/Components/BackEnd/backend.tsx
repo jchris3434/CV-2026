@@ -21,6 +21,7 @@ export default function BackEnd() {
       stepCount={5}
       images={images}
       altPrefix="logo tech"
+      stepNumber={2}
     />
   );
 }

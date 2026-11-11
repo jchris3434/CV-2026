@@ -5,19 +5,15 @@ vi.mock('next-intl', () => ({
   useTranslations: () => Object.assign((key: string) => key, { rich: (key: string) => key }),
 }))
 
-vi.mock('next/image', () => ({
-  default: ({ alt }: { alt: string }) => <img alt={alt} />,
-}))
-
 describe('AboutMe', () => {
   test('renders the section and heading', () => {
     render(<AboutMe />)
     expect(screen.getByRole('heading', { level: 1 })).toBeInTheDocument()
   })
 
-  test('renders the profile image', () => {
+  test('has no picture, the portrait is already in the banner', () => {
     render(<AboutMe />)
-    expect(screen.getByAltText('Picture of the author')).toBeInTheDocument()
+    expect(screen.queryByRole('img')).not.toBeInTheDocument()
   })
 
   test('renders biography paragraphs', () => {

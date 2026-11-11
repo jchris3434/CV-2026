@@ -1,77 +1,44 @@
 .sectionAbout {
-  min-height: calc(100vh - 4rem);
-  width: 90%;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
   align-items: center;
+  min-height: 100svh;
+  padding: var(--section-space) var(--gutter);
 }
 
+.inner {
+  width: min(100%, 48rem);
+  margin-inline: auto;
+}
+
+/* ---------- Texte ---------- */
 
 .divLeft {
-  width: 55%;
-  padding: 1rem;
-  font-size: 1.1rem;
-}
-
-
-.divLeft p {
-  text-align: justify;
-}
-
-.divLeft p:first-of-type {
-  text-align: left;
-}
-
-.divRight {
-  width: 45%;
   display: flex;
-  justify-content: center;
   flex-direction: column;
-}
-
-.spanBold {
-  font-weight: bold;
+  gap: 1.15rem;
+  color: var(--text-muted);
 }
 
 .spanTitle {
-  text-align: center;
-  font-size: 3rem;
+  margin-bottom: 0.6rem;
 }
 
 .spanPassion {
-  text-align: left;
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(1.25rem, 2.2vw, 1.6rem);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  color: var(--text);
 }
 
-.imageLeft {
-  width: auto;
-  height: 25rem;
-  object-fit: contain;
+.spanBold {
+  font-weight: 600;
+  color: var(--text);
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media (max-width: 900px) {
-  .sectionAbout {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
-
-  .divLeft {
-    width: 85%;
-    padding: 0;
-  }
-
-  .divRight {
-    display: none;
-  }
-
-  .spanTitle {
-  text-align: center;
-  font-size: 2.5rem;
-}
+.spanPassion .spanBold {
+  background: var(--gradient);
+  background-clip: text;
+  color: transparent;
 }

@@ -1,40 +1,80 @@
-.conception {
-  width: 90%;
-  min-height: 100vh;
-  margin: 0 auto;
-  padding: 10rem 0 6rem 0;
-}
-
 .maintitle {
-  font-size: 3rem;
+  margin-bottom: clamp(1.25rem, 3.5vh, 4rem);
 }
 
-.title {
-  font-size: 1.4rem;
-  font-weight: 600;
-  margin-bottom: 2rem;
+/* ===== Cadre du carousel, façon fenêtre ===== */
+
+.frame {
+  /* Sur un écran peu haut (portable), le cadre se réduit pour tenir en entier
+     sous la barre : le diagramme garde son format 16/10. */
+  max-width: max(26rem, calc((100svh - 19rem) * 1.6));
+  margin-bottom: 2.25rem;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
 }
 
-/* ===== Layout 2 colonnes ===== */
+/* Grand écran (réglages du portable inchangés) : le carrousel déborde un peu de
+   la colonne vers la droite (12 rem au plus, pour rester loin du bord de l'écran), et se règle sur la hauteur de la fenêtre pour
+   remplir le premier écran de la section, sous le titre. */
+@media (min-width: 1500px) and (min-height: 900px) {
+  /* Le texte démarre sous le bas de l'écran : il n'apparaît qu'au défilement. */
+  .stage {
+    min-height: calc(100svh - 12rem);
+    /* Descend le cadre pour le centrer entre le titre et le bas de l'écran. */
+    padding-top: 3rem;
+  }
 
-.layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  align-items: start;
+  .frame {
+    width: min(calc((100svh - 28rem) * 1.6), calc(100% + min(12rem, (100vw - 75rem) / 2 - 3rem)));
+    max-width: none;
+  }
 }
 
-.leftside {
+.frameBar {
   display: flex;
-  justify-content: center;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.light {
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 50%;
+  background: var(--lava);
+}
+
+.light:nth-child(2) {
+  background: var(--coral);
+}
+
+.light:nth-child(3) {
+  background: var(--lagoon);
+}
+
+.counter {
+  margin-left: auto;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--text-faint);
 }
 
 /* ===== Embla Carousel ===== */
 
+/* Les diagrammes sont dessinés pour un fond blanc : il reste blanc en thème nuit. */
 .embla {
   overflow: hidden;
-  max-width: 90%;
-  height: auto;
+  background: #fff;
+  cursor: grab;
+}
+
+.embla:active {
+  cursor: grabbing;
 }
 
 .emblaContainer {
@@ -42,58 +82,63 @@
 }
 
 .emblaSlide {
+  position: relative;
   flex: 0 0 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  min-width: 0;
+  aspect-ratio: 16 / 10;
 }
 
+/* Le diagramme est sorti du flux : sa hauteur naturelle (certains sont très
+   hauts) ne peut plus étirer la diapositive au-delà de son format. */
 .emblaSlide img {
-  width: 100%;
-  height: auto;
+  position: absolute;
+  inset: 1.25rem;
+  width: calc(100% - 2.5rem);
+  height: calc(100% - 2.5rem);
   object-fit: contain;
 }
 
-/* ===== Texte ===== */
+/* ===== Points de navigation ===== */
 
-.center p {
-  margin-bottom: 1rem;
-  line-height: 1.6;
-  opacity: 0.9;
-  font-size: 1.1rem;
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.15rem;
+  padding: 0.6rem 1rem;
+  border-top: 1px solid var(--border);
 }
 
-/* image portrait */
-.tall img {
-  width: 65%;
-  height: auto;
+.dot {
+  display: grid;
+  place-items: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  transition: width 0.4s var(--ease-out);
 }
 
-/* image paysage */
-.wide img {
-  width: 85%;
-  max-height: auto; /* ajuste selon rendu */
+.dot::before {
+  content: '';
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: var(--border-strong);
+  transition:
+    width 0.4s var(--ease-out),
+    background-color 0.3s ease;
 }
 
+.dot:hover::before {
+  background: var(--text-muted);
+}
 
-/* ===== Responsive ===== */
+.dotActive {
+  width: 2.2rem;
+}
 
-@media (max-width: 900px) {
-  .layout {
-    grid-template-columns: 1fr;
-  }
-
-  .leftside {
-    margin-bottom: 1rem;
-  }
-
-  .maintitle {
-    font-size: 2.5rem;
-  }
-
-  .conception {
-    height: auto;
-    min-height: auto;
-    padding-top: 8rem;
-  }
+.dotActive::before {
+  width: 1.5rem;
+  background: var(--lagoon);
 }

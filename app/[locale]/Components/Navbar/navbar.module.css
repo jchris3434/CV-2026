@@ -1,140 +1,304 @@
+/* Barre flottante en verre dépoli, centrée en haut de l'écran. */
 .header {
-  position: sticky;
-  top: 0;
-  background-color: #fff;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  
-  z-index: 1000;
-  color: #555; /* On met une couleur visible par défaut */
+  position: fixed;
+  top: 0.9rem;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  padding: 0 var(--gutter);
+  pointer-events: none;
+  /* « backwards » : une fois l'entrée jouée, plus aucune transformation ne
+     reste sur l'en-tête (elle gênerait le menu mobile en position: fixed). */
+  animation: drop 0.9s var(--ease-out) backwards;
 }
 
-.navContainer {
+@keyframes drop {
+  from {
+    opacity: 0;
+    transform: translateY(-1.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* --- BARRE DE PROGRESSION DE LECTURE --- */
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+}
+
+@supports (animation-timeline: scroll()) {
+  .progress {
+    animation: grow linear both;
+    animation-timeline: scroll(root block);
+  }
+}
+
+@keyframes grow {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* --- BARRE --- */
+.bar {
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 100%;
-  position: relative; /* Pour positionner LocaleSelect et Hamburger */
-  min-height: 4rem;
+  gap: 0.5rem;
+  min-height: 3.5rem;
+  padding: 0.4rem 0.6rem 0.4rem 1.1rem;
+  border-radius: 999px;
+  pointer-events: auto;
+  isolation: isolate;
+}
+
+/* Le flou est porté par un pseudo-élément : appliqué à .bar, il empêcherait
+   le menu mobile (position: fixed) de couvrir tout l'écran. */
+.bar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border: 1px solid var(--border);
+  border-radius: inherit;
+  background: color-mix(in srgb, var(--surface) 72%, transparent);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(16px) saturate(160%);
+}
+
+.brand {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  margin-right: 0.25rem;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition:
+    color 0.25s ease,
+    background-color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+/* Même gris et même survol que le bouton de thème, avec le petit zoom des
+   drapeaux à la place de la rotation. Seule l'icône grossit : le cercle garde
+   la taille de celui du bouton de thème. */
+.brand:hover {
+  color: var(--text);
+  background: color-mix(in srgb, var(--text) 8%, transparent);
+  border-color: var(--border);
+}
+
+/* Petite maison : retour en haut de la page. */
+.brandIcon {
+  width: 1.2rem;
+  height: 1.2rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.4s var(--ease-out);
+}
+
+.brand:hover .brandIcon {
+  transform: scale(1.12);
 }
 
 /* --- NAVIGATION BASE --- */
 .nav {
-  font-weight: 600;
-  font-size: 1rem;
+  font-size: 0.95rem;
+  font-weight: 500;
 }
 
 .navList {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 1rem;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  min-height: 4rem;
+  gap: 0.15rem;
 }
 
-.navItem {
-  padding: 1rem;
-  border-bottom: 2px solid transparent;
-  cursor: pointer;
+/* Pastille qui glisse sous le lien actif */
+.navList::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: var(--indicator-width, 0);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--text) 9%, transparent);
   opacity: 0;
-  transition: opacity 0.5s ease-in-out, color 0.2s, transform 0.2s;
+  transform: translateX(var(--indicator-x, 0));
+  transition:
+    transform 0.5s var(--ease-out),
+    width 0.5s var(--ease-out),
+    opacity 0.3s ease;
 }
 
-.navItemVisible {
+.navList[data-active]::before {
   opacity: 1;
 }
 
-.navItem:hover {
-  transform: scale(1.15);
-  color: #333;
+.navItem {
+  position: relative;
+  animation: itemIn 0.7s var(--ease-out) both;
+  animation-delay: calc(0.25s + var(--i, 0) * 0.08s);
 }
 
-/* Style spécifique pour react-scroll quand la section est active */
-.navItem :global(.active) {
-  color: #1da9cc;
-  border-bottom: 2px solid #1da9cc;
-  padding-bottom: 1.1rem; /* Pour compenser la bordure */
+@keyframes itemIn {
+  from {
+    opacity: 0;
+    transform: translateY(-0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .navLink {
-  text-decoration: none !important; /* Force la suppression du souligné */
-  color: inherit !important;       /* Utilise la couleur du parent (navItem) */
-  outline: none;
+  display: block;
+  padding: 0.5rem 0.95rem;
+  border-radius: 999px;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.25s ease;
 }
 
-/* --- LOCALE SELECT --- */
-.localeWrapper {
-  position: absolute;
-  right: 2rem;
+.navLink:hover,
+.navLink.navLinkActive {
+  color: var(--text);
+}
+
+/* --- ACTIONS (langue, thème, menu) --- */
+.actions {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-left: 0.5rem;
 }
 
 /* --- HAMBURGER (Caché par défaut) --- */
 .hamburger {
   display: none;
   flex-direction: column;
-  justify-content: space-around;
-  width: 2rem;
-  height: 1.5rem;
-  background: transparent;
-  border: none;
-  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  width: 2.5rem;
+  height: 2.5rem;
   padding: 0;
-  z-index: 1001;
-  position: absolute;
-  left: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--text) 6%, transparent);
 }
 
-.bar {
-  width: 2rem;
-  height: 0.2rem;
-  background: #333;
-  border-radius: 10px;
-  transition: all 0.3s ease;
-  transform-origin: 1px;
+.line {
+  width: 1.05rem;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--text);
+  transition: transform 0.4s var(--ease-out);
 }
 
-.buttonFlag {
-  background: none;
-  border: none;
-  padding: 0.2rem;
-  cursor: pointer;
+/* Animation X */
+.lineOpen:nth-child(1) {
+  transform: translateY(calc(0.2rem + 1px)) rotate(45deg);
+}
+
+.lineOpen:nth-child(2) {
+  transform: translateY(calc(-0.2rem - 1px)) rotate(-45deg);
 }
 
 /* --- RESPONSIVE MOBILE --- */
 @media (max-width: 900px) {
+  .header {
+    top: 0.6rem;
+  }
+
+  .bar {
+    width: 100%;
+    justify-content: space-between;
+  }
+
   .hamburger {
     display: flex;
   }
 
-  /* Animation X */
-  .barOpen:nth-child(1) { transform: rotate(45deg); }
-  .barOpen:nth-child(2) { opacity: 0; transform: translateX(20px); }
-  .barOpen:nth-child(3) { transform: rotate(-45deg); }
-
+  /* Menu plein écran */
   .nav {
     position: fixed;
-    top: 4rem;
-    left: -100%; /* Caché */
-    width: 100%;
-    height: calc(100vh - 4rem);
-    background: #fff;
-    transition: left 0.4s cubic-bezier(0.77,0.2,0.05,1.0);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    inset: 0;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    background: color-mix(in srgb, var(--bg) 86%, transparent);
+    backdrop-filter: blur(22px);
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 0.4s ease,
+      visibility 0.4s;
   }
 
   .navOpen {
-    left: 0; /* Affiché */
+    opacity: 1;
+    visibility: visible;
   }
 
   .navList {
     flex-direction: column;
-    gap: 2rem;
+    gap: 0.75rem;
+  }
+
+  .navList::before {
+    display: none;
   }
 
   .navItem {
-    font-size: 1.5rem;
-    opacity: 1; /* On force la visibilité sur mobile */
+    animation: none;
+    opacity: 0;
+    transform: translateY(1.25rem);
+    transition:
+      opacity 0.5s var(--ease-out),
+      transform 0.5s var(--ease-out);
+  }
+
+  .navOpen .navItem {
+    opacity: 1;
+    transform: none;
+    transition-delay: calc(0.08s + var(--i, 0) * 0.07s);
+  }
+
+  .navLink {
+    padding: 0.4rem 1rem;
+    font-family: var(--font-display), sans-serif;
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .navLink.navLinkActive {
+    background: var(--gradient);
+    background-clip: text;
+    color: transparent;
   }
 }

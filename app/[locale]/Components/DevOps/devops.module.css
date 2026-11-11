@@ -1,43 +1,29 @@
 /* =========================
-   SECTION
-========================= */
-
-.devops {
-  padding: 4rem 0;
-  width: 100%;
-  min-height: 100vh;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-}
-
-.container {
-  max-width: 80%;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.maintitle {
-  font-size: 0.9rem;
-  letter-spacing: 0.12rem;
-  text-transform: uppercase;
-  opacity: 0.6;
-}
-
-.title {
-  font-size: 2.6rem;
-  font-weight: bold;
-  margin-bottom: 3rem;
-}
-
-/* =========================
    GRID
 ========================= */
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+/* La carte occupe toute la hauteur de sa case. */
+.cell {
+  display: grid;
+}
+
+/* Une couleur par pilier, du lagon à la lave. */
+.cell:nth-child(2) .card {
+  --accent: var(--sky);
+}
+
+.cell:nth-child(3) .card {
+  --accent: var(--coral);
+}
+
+.cell:nth-child(4) .card {
+  --accent: var(--lava);
 }
 
 /* =========================
@@ -45,51 +31,72 @@
 ========================= */
 
 .card {
+  --accent: var(--lagoon);
+
   position: relative;
-  overflow: hidden;
-  padding: 1.8rem;
-  border-radius: 14px;
-  text-align: left;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(6px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  padding: 1.6rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
   transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease,
-    border 0.25s ease;
+    transform 0.5s var(--ease-out),
+    box-shadow 0.5s ease;
 }
 
-/* État actif : Hover OU Classe active (Mobile) */
-.card:hover,
-.card.activeCard {
-  transform: translateY(-6px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow:
-    0 10px 30px rgba(0, 0, 0, 0.3),
-    0 0 20px rgba(100, 150, 255, 0.15);
-}
-
-/* Gradient de fond au survol/activation */
+/* Reflet qui suit le pointeur (variables posées par trackPointer). */
 .card::before {
-  content: "";
+  content: '';
   position: absolute;
   inset: 0;
-  border-radius: 14px;
-  background: linear-gradient(
-    120deg,
-    transparent,
-    rgba(120, 192, 244, 0.15),
-    transparent
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(
+    18rem circle at var(--mx, 50%) var(--my, 0%),
+    color-mix(in srgb, var(--accent) 17%, transparent),
+    transparent 72%
   );
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.5s ease;
   pointer-events: none;
 }
 
+/* Liseré lumineux : seul le contour du dégradé reste visible. */
+.card::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  padding: 1px;
+  border-radius: inherit;
+  background: radial-gradient(
+    15rem circle at var(--mx, 50%) var(--my, 0%),
+    var(--accent),
+    transparent 72%
+  );
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+/* État actif : survol OU classe active (petit écran) */
+.card:hover,
+.card.activeCard {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+}
+
 .card:hover::before,
-.card.activeCard::before {
+.card:hover::after,
+.card.activeCard::before,
+.card.activeCard::after {
   opacity: 1;
 }
 
@@ -97,18 +104,42 @@
    TEXT
 ========================= */
 
-.card h3 {
-  font-size: 1.25rem;
-  margin-bottom: 0.8rem;
-  text-align: center;
+.cardTitle {
+  font-family: var(--font-display), sans-serif;
+  font-size: 1.2rem;
   font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
 }
 
-.card p {
-  text-align: justify;
-  hyphens: auto;
-  font-size: 1.05rem;
-  opacity: 0.9;
+/* Trait d'accent au-dessus du titre : il s'allonge quand la carte est active. */
+.cardTitle::before {
+  content: '';
+  display: block;
+  width: 1.75rem;
+  height: 3px;
+  margin-bottom: 1rem;
+  border-radius: 3px;
+  background: var(--accent);
+  transition: width 0.5s var(--ease-out);
+}
+
+.card:hover .cardTitle::before,
+.card.activeCard .cardTitle::before {
+  width: 3.5rem;
+}
+
+/* « pre-line » : les sauts de ligne du texte séparent les deux idées. */
+.text {
+  font-size: 0.97rem;
+  line-height: 1.65;
+  white-space: pre-line;
+  color: var(--text-muted);
+}
+
+.text strong {
+  font-weight: 600;
+  color: var(--text);
 }
 
 /* =========================
@@ -116,69 +147,36 @@
 ========================= */
 
 .icons {
-  margin-top: 1rem;
-  display: grid;
-  grid-template-columns: repeat(2, auto);
-  gap: 0.8rem;
-  justify-content: center;
-  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: auto;
+  padding-top: 0.5rem;
 }
 
-.logo,
-.logoRect {
-  display: block;
-  object-fit: contain;
-  margin: 0 auto;
-  transition: transform 0.25s ease, filter 0.25s ease;
+.icons .tile {
+  width: 5.75rem;
+  height: 3.5rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: 0.8rem;
+  transition: transform 0.4s var(--ease-out);
 }
 
-.logo {
-  width: 5rem;
-  height: auto;
-}
-
-.logoRect {
-  width: auto;
-  height: 2rem;
-}
-
-/* Animation des logos au survol/activation */
-.card:hover .logo,
-.card.activeCard .logo,
-.card:hover .logoRect,
-.card.activeCard .logoRect {
-  transform: scale(1.08);
-  filter: brightness(1.1);
+.card:hover .tile,
+.card.activeCard .tile {
+  transform: translateY(-2px);
 }
 
 /* =========================
    RESPONSIVE
 ========================= */
 
-@media (max-width: 1600px) {
-  .container {
-    max-width: 90%;
-  }
-}
-
-@media (max-width: 900px) {
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.8rem;
-  }
-}
-
-@media (max-width: 500px) {
+@media (max-width: 640px) {
   .grid {
     grid-template-columns: 1fr;
   }
 
-  .title {
-    font-size: 2.1rem;
-  }
-
-  /* Sur très petit écran, on peut réduire un peu le padding pour gagner de la place */
   .card {
-    padding: 1.4rem;
+    padding: 1.35rem;
   }
 }
