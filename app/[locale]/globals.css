@@ -174,6 +174,17 @@ button {
   background: var(--gradient);
 }
 
+/* Sur mobile, les titres de section (et leur petit trait) sont centrés. */
+@media (max-width: 900px) {
+  .section-title {
+    text-align: center;
+  }
+
+  .section-title::before {
+    margin-inline: auto;
+  }
+}
+
 /* ---------- Cadre de page : grain de fond ---------- */
 
 .page {

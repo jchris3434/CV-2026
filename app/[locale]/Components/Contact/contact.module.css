@@ -204,8 +204,10 @@ textarea.field {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
   gap: 0.75rem 1.25rem;
   margin-top: 0.4rem;
+  text-align: center;
 }
 
 .submit {
@@ -215,13 +217,12 @@ textarea.field {
   padding: 0.85rem 1.6rem;
   border: 0;
   border-radius: 999px;
-  background: var(--text);
+  /* Dégradé lave / corail / ciel : texte sombre sur la nuit, blanc sur le jour
+     pour garder le contraste. */
+  background: var(--gradient);
   color: var(--bg);
   font-weight: 600;
-  box-shadow:
-    -0.6rem 0 1.6rem -0.7rem var(--lava),
-    0.6rem 0 1.6rem -0.7rem var(--sky),
-    0 0.5rem 1.6rem -0.9rem var(--coral);
+  box-shadow: 0 0.6rem 1.6rem -0.8rem var(--coral);
   transition:
     transform 0.4s var(--ease-out),
     box-shadow 0.4s ease,
@@ -230,10 +231,11 @@ textarea.field {
 
 .submit:hover:enabled {
   transform: translateY(-3px);
-  box-shadow:
-    -0.9rem 0 2.2rem -0.6rem var(--lava),
-    0.9rem 0 2.2rem -0.6rem var(--sky),
-    0 0.9rem 2.2rem -0.7rem var(--coral);
+  box-shadow: 0 0.9rem 2rem -0.8rem var(--coral);
+}
+
+:global(html[data-theme='light']) .submit {
+  color: #fff;
 }
 
 .submit:hover:enabled .submitArrow {
@@ -277,6 +279,31 @@ textarea.field {
 
   .inner {
     grid-template-columns: 1fr;
+  }
+
+  /* Le titre est centré sur mobile : la phrase d'accroche suit. */
+  .subtitle {
+    text-align: center;
+  }
+
+  /* LinkedIn et GitHub restent côte à côte, chacun sur la moitié de la ligne. */
+  .icons {
+    flex-wrap: nowrap;
+    gap: 0.6rem;
+  }
+
+  .link {
+    flex: 1;
+    justify-content: center;
+    gap: 0.5rem;
+    min-width: 0;
+    padding: 0.3rem 0.75rem 0.3rem 0.3rem;
+    font-size: 0.9rem;
+  }
+
+  .linkIcon {
+    width: 2rem;
+    height: 2rem;
   }
 }
 

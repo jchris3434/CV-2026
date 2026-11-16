@@ -12,27 +12,100 @@
   margin-bottom: clamp(2.5rem, 6vh, 4rem);
 }
 
-/* Grille « bento » : une grande vignette, quatre petites, deux moyennes. */
+/* Grille sur 12 colonnes : trois projets à la une et trois moyennes (4 colonnes
+   chacun), puis, sous « Plus de projets », quatre petites vignettes (3 colonnes). */
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: 1rem;
 }
 
 .cell {
   display: grid;
+}
+
+.cellFeatured {
+  grid-column: span 4;
+  aspect-ratio: 16 / 10;
+}
+
+.cellWide {
+  grid-column: span 4;
+  aspect-ratio: 16 / 10; /* même format que les projets à la une : lignes de même hauteur */
+}
+
+.cellSmall {
+  grid-column: span 3;
   aspect-ratio: 4 / 3;
 }
 
-.cell:first-child {
-  grid-column: span 2;
-  grid-row: span 2;
-  aspect-ratio: auto;
+/* ---------- Projets repliés : « Plus de projets » ---------- */
+
+/* La hauteur passe de 0 à sa taille naturelle (grille à 0fr puis 1fr). */
+.more {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.6s var(--ease-out);
 }
 
-.cell:nth-child(n + 6) {
-  grid-column: span 2;
-  aspect-ratio: 16 / 9;
+.more[data-open] {
+  grid-template-rows: 1fr;
+}
+
+.moreInner {
+  min-height: 0;
+  overflow: hidden;
+  transition: padding-top 0.6s var(--ease-out);
+}
+
+/* L'écart avec la ligne du dessus n'existe que dépliée : un cadre replié
+   garde au moins la hauteur de son remplissage. */
+.more[data-open] .moreInner {
+  padding-top: 1rem;
+}
+
+.moreAction {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.moreButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.8rem 1.5rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+  font-weight: 600;
+  color: var(--text);
+  transition:
+    transform 0.4s var(--ease-out),
+    border-color 0.25s ease;
+}
+
+.moreButton:hover {
+  border-color: var(--lagoon);
+  transform: translateY(-3px);
+}
+
+.moreIcon {
+  width: 1.05rem;
+  height: 1.05rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+/* Le « + » devient un « − » quand la liste est dépliée. */
+.moreIcon path {
+  transition: opacity 0.3s ease;
+}
+
+.moreButton[aria-expanded='true'] .moreIcon path:first-child {
+  opacity: 0;
 }
 
 /* Cards */
@@ -163,12 +236,12 @@
   scale: 1.18;
 }
 
-.cell:first-child .playButton {
+.cellFeatured .playButton {
   width: 4.5rem;
   height: 4.5rem;
 }
 
-.cell:first-child .playButton svg {
+.cellFeatured .playButton svg {
   width: 1.6rem;
   height: 1.6rem;
 }
@@ -202,12 +275,13 @@
   letter-spacing: -0.01em;
 }
 
-.cell:first-child .caption {
+.cellFeatured .caption {
   padding: 1.5rem 1.6rem;
 }
 
-.cell:first-child .cardTitle {
-  font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+.cellFeatured .cardTitle {
+  font-size: clamp(1.25rem, 1.9vw, 1.6rem);
+  text-wrap: balance;
 }
 
 /* Modal fullscreen : salle obscure, quel que soit le thème. */
@@ -314,20 +388,49 @@
    RESPONSIVE
 ========================= */
 
-/* Deux colonnes : la grande vignette prend toute la largeur. */
-@media (max-width: 900px) {
-  .cell:first-child {
-    grid-row: auto;
-    aspect-ratio: 16 / 9;
+/* Fenêtre moyenne : les vignettes à la une sont étroites, les longs titres
+   restent sur deux lignes et ne recouvrent plus le bouton de lecture. */
+@media (min-width: 901px) and (max-width: 1200px) {
+  .cellFeatured .playButton {
+    width: 3.25rem;
+    height: 3.25rem;
   }
 
-  .cell:nth-child(n + 6) {
+  .cellFeatured .playButton svg {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+
+  .cellFeatured .caption {
+    padding: 1rem 1.15rem;
+  }
+
+  .cellFeatured .cardTitle {
+    font-size: 1.05rem;
+  }
+}
+
+/* Deux colonnes : les projets à la une prennent toute la largeur. */
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cellWide,
+  .cellSmall {
     grid-column: auto;
     aspect-ratio: 4 / 3;
   }
 
-  .grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .cellFeatured {
+    grid-column: span 2;
+    aspect-ratio: 16 / 9;
+  }
+
+  /* Trois vignettes moyennes sur deux colonnes : la dernière passe en pleine largeur. */
+  .grid > .cellWide:last-child {
+    grid-column: span 2;
+    aspect-ratio: 16 / 9;
   }
 }
 
@@ -337,21 +440,20 @@
     grid-template-columns: 1fr;
   }
 
-  .cell,
-  .cell:nth-child(n + 6) {
+  .cellFeatured,
+  .cellWide,
+  .cellSmall,
+  .grid > .cellWide:last-child {
+    grid-column: auto;
     aspect-ratio: 16 / 9;
   }
 
-  .cell:first-child {
-    grid-column: auto;
-  }
-
-  .cell:first-child .playButton {
+  .cellFeatured .playButton {
     width: 3.25rem;
     height: 3.25rem;
   }
 
-  .cell:first-child .playButton svg {
+  .cellFeatured .playButton svg {
     width: 1.2rem;
     height: 1.2rem;
   }
