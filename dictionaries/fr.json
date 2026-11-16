@@ -71,7 +71,12 @@
   },
   "projects": {
     "sectionTitle": "Projets",
+    "more": "Plus de projets",
+    "less": "Moins de projets",
     "items": {
+      "goldenChicken": "Golden Chicken : app de trading crypto",
+      "genealogie": "Généalogie familiale",
+      "maintenance": "Agent IA et maintenance automatisée",
       "exaprint": "Exaprint",
       "woocommerce": "Site WooCommerce",
       "restaurant": "Restaurant",

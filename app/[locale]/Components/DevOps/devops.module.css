@@ -179,4 +179,9 @@
   .card {
     padding: 1.35rem;
   }
+
+  /* Les logos de chaque carte sont centrés sous le texte. */
+  .icons {
+    justify-content: center;
+  }
 }

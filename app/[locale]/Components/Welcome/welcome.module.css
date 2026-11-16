@@ -444,6 +444,11 @@
     padding: 6.5rem var(--gutter) 4.5rem;
   }
 
+  /* Sur mobile, la photo est juste au-dessus du nom : la formule est superflue. */
+  .greeting {
+    display: none;
+  }
+
   .inner {
     grid-template-columns: 1fr;
     gap: 2.75rem;

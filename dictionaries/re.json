@@ -71,7 +71,12 @@
   },
   "projects": {
     "sectionTitle": "Prozé",
+    "more": "Plis bann prozé",
+    "less": "Mwin bann prozé",
     "items": {
+      "goldenChicken": "Golden Chicken : app de trading crypto",
+      "genealogie": "Généalogie familiale",
+      "maintenance": "Agent IA et maintenance automatisée",
       "exaprint": "Exaprint",
       "woocommerce": "Site WooCommerce",
       "restaurant": "Restaurant",

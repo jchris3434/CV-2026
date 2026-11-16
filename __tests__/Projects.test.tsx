@@ -15,8 +15,25 @@ describe('Projects', () => {
   test('renders the section heading and all project cards', () => {
     render(<Projects />)
     expect(screen.getByRole('heading', { level: 1 })).toBeInTheDocument()
-    // 7 project thumbnails → 7 buttons
-    expect(screen.getAllByRole('button')).toHaveLength(7)
+    // 10 project thumbnails + the « more projects » toggle → 11 buttons
+    expect(screen.getAllByRole('button')).toHaveLength(11)
+  })
+
+  test('keeps the four oldest projects folded until the toggle is used', () => {
+    const { container } = render(<Projects />)
+    const toggle = screen.getByRole('button', { name: 'more' })
+    const folded = container.querySelector('[inert]')
+
+    expect(toggle).toHaveAttribute('aria-expanded', 'false')
+    expect(folded?.querySelectorAll('article')).toHaveLength(4)
+
+    fireEvent.click(toggle)
+
+    expect(screen.getByRole('button', { name: 'less' })).toHaveAttribute('aria-expanded', 'true')
+    expect(container.querySelector('[inert]')).toBeNull()
+
+    fireEvent.click(screen.getByRole('button', { name: 'less' }))
+    expect(container.querySelector('[inert]')).not.toBeNull()
   })
 
   test('opens a modal when a project card is clicked', () => {
