@@ -5,6 +5,8 @@ on:
   push:
     branches:
       - main
+  # Permet de relancer le déploiement à la main (bouton « Reconstruire »)
+  workflow_dispatch:
 
 jobs:
   build-and-push:
