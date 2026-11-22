@@ -26,7 +26,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/cv-2026:latest .
+          docker build --pull -t ${{ secrets.DOCKERHUB_USERNAME }}/cv-2026:latest .
 
       - name: Push Docker image
         run: |
@@ -46,3 +46,4 @@ jobs:
             cd ${{ secrets.VPS_PATH }}
             docker compose pull
             docker compose up -d
+            docker image prune -f
